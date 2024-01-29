@@ -10,7 +10,7 @@ How many people could have worked for the Tylers? Why couldn't there be more?
 
 # We will need to generate list of prime numbers, And than try to divide possible ID's by prime numbers, what is left, should be ID's of all members
 
-# Generating Primes takes ages. It is faster to get those firs, save them and continue from there...
+# Generating Primes takes ages. It is faster to get those first, save them and continue from there...
 mx = 510000
 # prime_list = [x for x in range(200000, mx) if not [t for t in range(2, int(x/2+1)) if not x % t]]
 # print(prime_list)
@@ -24,7 +24,7 @@ prime_list = [x for x in prime_list if x > 20]
 # now list of all possible ID's
 foo = [x for x in range(2, 900000)]
 
-# If one member of group has even ID, that means all of them have even ID. ID's can be dividible by 2, but not by 4, except 4
+# If one member of group has even ID, that means all of them have even ID. ID's can be divisible by 2, but not by 4, except 4
 foo = [x for x in foo if x % 4 == 2 or x == 4]
 
 # div4plus2 = [x for x in range(800000, 1000000) if x % 4 == 2 or x == 4]
@@ -62,7 +62,7 @@ print(foo2)
 foo2 = [2, 4, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 50, 66, 70, 78, 98, 102, 110, 114, 130, 154, 170, 182, 190, 210, 238, 242, 266, 286, 330, 338, 374, 390, 418, 442, 462, 494, 510, 546, 570, 578, 646, 714, 722, 770, 798, 858, 910, 1122, 1190, 1254, 1326, 1330, 1430, 1482, 1870, 1938, 2002, 2090, 2210, 2310, 2470, 2618, 2730, 2926, 3094, 3230, 3458, 3570, 3990, 4290, 4522, 4862, 5434, 5610, 6006, 6270, 6630, 7106, 7410, 7854, 8398, 8778, 9282, 9690, 10010, 10374, 13090, 13566, 14586, 14630, 15470, 16302, 17290, 21318, 22610, 24310, 25194, 27170, 30030, 34034, 35530, 38038, 39270, 41990, 43890, 46410, 49742, 51870, 58786, 67830, 72930, 81510, 92378, 102102, 106590, 114114, 125970, 149226, 170170, 176358, 190190, 248710, 277134, 293930, 461890, 510510, 570570, 646646, 746130, 881790]
 print(len(foo2))
 
-# Now we have our list of possible numbers. We have to find out what makes them special and write some good theory, why these numbers.
+# Now we have our list of possible numbers. We have to find out what makes them special and write some good theory...
 
 # Right answer is 136 and all of them are created by multipling some primes smaller than 20
 
