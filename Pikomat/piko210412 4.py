@@ -3,50 +3,21 @@
 
 Math problem which I decided to solve with Python.
 
-6. Plus mínus to sedí
-a
-V Malpere sa pri účtovníctve využívali znamienkové pyramídy. Takáto pyramída je na začiatku prázdna. Do každého políčka v spodnom riadku sa napíše znamienko plus alebo mínus. Zvyšné políčka sa vypĺňajú nasledovne:
+6. Plus minus it fits
 
-    Do políčka, pod ktorým sú dve políčka s rovnakými znamienkami, sa napíše plus.
-    Do políčka, pod ktorým sú dve políčka s opačnými znamienkami, sa napíše mínus.
+In Malpera, sign pyramids were used for accounting. Such a pyramid is initially empty. A plus or minus sign is written in each box in the bottom row. The remaining fields are filled in as follows:
 
-Jedno také vyplnenie pyramídy so štyrmi riadkami je na obrázku. Znamienková pyramída na starostkinom dokumente však mala 9 riadkov. V najvrchnejšom políčku a v políčku, ktoré je najviac vľavo v spodnom riadku, boli znamienka mínus. Aké znamienko bolo v políčku, ktoré je najviac vpravo v spodnom riadku? Nezabudni sa zamyslieť nad oboma možnosťami.
+     A plus is written in the box under which there are two boxes with the same signs.
+     A minus is written in the box below which there are two boxes with opposite signs.
+
+One such filling of the pyramid with four lines is shown in the picture.
+  -
+ + -
+- - +  
+
+However, the sign pyramid on the mayor's document had 9 lines. There were minus signs in the topmost box and in the leftmost box in the bottom row. What was the sign in the rightmost box in the bottom row? Don't forget to think about both options.
 '''
-
-# from itertools import permutations
-# from itertools import combinations
-# from itertools import combinations_with_replacement
-
-# perm = permutations([1, 2, 3, 4])
-# comb = combinations_with_replacement([1, 2, 3], 2)
-
-# for i in list(comb):
-#     print(i)
-
-utvar = 8
-stas = 0
-nestas = 0
-for i1 in range(1, utvar+1):
-    continue
-    for i2 in range(1, utvar+1):
-        for i3 in range(1, utvar+1):
-            for i4 in range(1, utvar+1):
-                for i5 in range(1, utvar+1):
-                    sucet = i1 + i2 + i3 + i4 + i5
-                    sucet = sucet % 2
-                    sucin = i1 * i2 * i3 * i4 * i5
-                    sucin = sucin % 2
-                    if sucet == 0 and sucin == 1:
-                        print(i1, i2, i3, i4, sucet, sucin)
-                        stas += 1
-                    else:
-                        nestas += 1
-print(stas, nestas)
-
-
-# 0:64  0:216   0:512
-# 16:240    81:1215 256:3840
-# 0:1024    0:7776  0:32768
+# Solution: Instead of + and - we will be using 1 and 0. and we filter out everything which doesn't have 0 on bottom left and on top.
 
 
 def bin_transform(s):
@@ -58,22 +29,26 @@ def bin_transform(s):
             s2 += '0'
     return s2
 
-
-for i in range(512):  #512
-    #print(bin(i))
+# Highest number with lenght of 9 in binary is 511.
+for i in range(512): 
     foo = bin(i)
     foo = foo.replace('b', '')
+    # Leading 0-es
     if len(foo) < 9:
         foo = ('0' * (9-len(foo))) + foo
     elif len(foo) == 10:
         foo = foo[1:]
+    # filter out everything with 1 on bottom left
     if foo[-1] == '1':
         continue
     a = foo
+    # Apply rules for higher floors
     while len(foo) > 1:
         foo = bin_transform(foo)
         a += ' ' + foo
     if foo == '1':
         continue
+    # Print all correct pyramids
     print(a)
 
+# End Result: Bottom right is always 1 (+)
