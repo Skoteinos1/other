@@ -4,7 +4,7 @@
 Math problem which I decided to solve with Python.
 
 6. Plus mínus to sedí
-
+a
 V Malpere sa pri účtovníctve využívali znamienkové pyramídy. Takáto pyramída je na začiatku prázdna. Do každého políčka v spodnom riadku sa napíše znamienko plus alebo mínus. Zvyšné políčka sa vypĺňajú nasledovne:
 
     Do políčka, pod ktorým sú dve políčka s rovnakými znamienkami, sa napíše plus.
