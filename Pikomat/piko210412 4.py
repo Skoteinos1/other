@@ -1,18 +1,16 @@
 '''
-     6. Plus mínus to sedí
-7 8 9 Sekunda Tercia Kvarta
+# https://pikomat.sk/ulohy/18#uloha-5
+
+Math problem which I decided to solve with Python.
+
+6. Plus mínus to sedí
 
 V Malpere sa pri účtovníctve využívali znamienkové pyramídy. Takáto pyramída je na začiatku prázdna. Do každého políčka v spodnom riadku sa napíše znamienko plus alebo mínus. Zvyšné políčka sa vypĺňajú nasledovne:
 
     Do políčka, pod ktorým sú dve políčka s rovnakými znamienkami, sa napíše plus.
     Do políčka, pod ktorým sú dve políčka s opačnými znamienkami, sa napíše mínus.
 
-Obrazok
-
 Jedno také vyplnenie pyramídy so štyrmi riadkami je na obrázku. Znamienková pyramída na starostkinom dokumente však mala 9 riadkov. V najvrchnejšom políčku a v políčku, ktoré je najviac vľavo v spodnom riadku, boli znamienka mínus. Aké znamienko bolo v políčku, ktoré je najviac vpravo v spodnom riadku? Nezabudni sa zamyslieť nad oboma možnosťami.
-
-
-# https://pikomat.sk/ulohy/18#uloha-5
 '''
 
 # from itertools import permutations
