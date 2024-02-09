@@ -9,7 +9,7 @@ strings_to_have = [
     'MUST',
     'CONTAIN',
     "THESE",
-    'STRINGS',
+    'STRINGS.',
 ]
 
 for path, subdirs, files in os.walk(path):
