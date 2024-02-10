@@ -26,7 +26,7 @@ users_dic = {
 }
 imap_ssl_port = 993
 
-pth = '/home/skoty/Peti/Projects/P39/Email/'  # Has to be defined because of debug bug
+pth = '/PATH/TO/FOLDER/'  # Has to be defined because of debug bug
 
 
 def save_pickle(file, data1):
