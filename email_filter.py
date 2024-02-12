@@ -2,8 +2,8 @@
 This code removes spam. and keeps itself "autoupdated". It ignores SEEN emails. Doesn't work with Gmail. You need some API permissions for those
 
 option = 1
-Reads unseen emails. It removes everything which contains forbidden words.
-Removes everything with same body, or from same sender. Always keeps first occurance of those.
+Reads unseen emails. It removes everything which contains forbidden words, everything with same body or from same sender. And flags them as spammers.
+Once Somebody is flagged as spammer, all his messages will be deleted.
 So if Mr. Spammer send you an email his first will be kept, rest of his emails from all your acounts will be deleted. Just keep first mail as UNREAD. 
 Also stores content of mails in pickle
 
@@ -19,14 +19,16 @@ import time
 import imaplib
 import email
 import pickle
+import datetime
+import re
 
 users_dic = {
-    'MAIL': ('PASSWORD', 'imap.SERVER.XX'),
-    'MAIL': ('PASSWORD', 'imap.SERVER.XX'),
+    # 'MAIL': ('PASSWORD', 'imap.SERVER.XX'),
+    # 'MAIL': ('PASSWORD', 'imap.SERVER.XX'),
 }
 imap_ssl_port = 993
 
-pth = '/PATH/TO/FOLDER/'  # Has to be defined because of debug bug
+pth = '/PATH/TO/YOUR/FOLDER/'  # Has to be defined because of debug bug
 
 
 def save_pickle(file, data1):
@@ -52,11 +54,11 @@ def load_pickle(fl_nm):
 
 
 forbidden_words = [
-    'casino',
-    'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 
+    'casino', 'online casios'
+    'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'Hello. And Bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
-    'growth service, which increases',
-    '.ru>',
+    'growth service, which increases', 
+    '.ru>', 
 ]
 #  '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
 
@@ -66,6 +68,10 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     global message_list
     global from_list
     global from_list_mail
+    global spammer_dict
+
+    spammer_list = list(spammer_dict.keys())
+
     
     # Set up the IMAP connection
     mail = imaplib.IMAP4_SSL(imap_ssl_host)
@@ -81,7 +87,8 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         status, data = mail.fetch(num, '(BODY.PEEK[])')
         email_message = email.message_from_bytes(data[0][1])
         from_str = str(email_message['From'])
-        from_str2 = from_str.split('<')[1]
+        from_str2 = re.search(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", from_str).group()
+
         print('From:', from_str)
         print('Subject:', email_message['Subject'])
         # print('Date:', email_message['Date'])
@@ -92,36 +99,56 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         # print('Body:', msg_body)
         # print()
 
+        msg_deleted = False
         if any(x in msg_body for x in forbidden_words):
             print('Body:', msg_body)
             print('-------- DELETED: Forbidden Word----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True
         elif any(x in from_str for x in forbidden_words):
             print('Body:', msg_body)
             print('-------- DELETED: FROM Forbidden Word----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')    
+            msg_deleted = True
         elif msg_body in message_list:
             print('Body:', msg_body)
             print('-------- DELETED: Same message ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True
         elif email_message['From'] in from_list:
             print('Body:', msg_body)
             print('-------- DELETED: Same Author ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
-        elif from_str2 in from_list_mail:
+            msg_deleted = True
+        elif from_str2 in from_list_mail or from_str2 in spammer_list:
             print('Body:', msg_body)
             print('-------- DELETED: Same Author Mail ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True
+        elif from_str2 in spammer_list:
+            print('Body:', msg_body)
+            print('-------- DELETED: Known Spammer ----------\n\n')
+            mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True
         else:
             message_list.append(msg_body)
             from_list.append(from_str)
             from_list_mail.append(from_str2)
+        if msg_deleted:
+            if from_str2 not in spammer_dict:
+                spammer_dict[from_str2] = [datetime.datetime.date(datetime.datetime.today()), 1]
+                spammer_list.append(from_str2)
+            else:
+                spammer_dict[from_str2][0] = datetime.datetime.date(datetime.datetime.today())
+                spammer_dict[from_str2][1] += 1
+
         print()
         # mail.expunge()
 
     save_pickle('message_list', message_list)
     save_pickle('from_list', from_list)
     save_pickle('from_list_mail', from_list_mail)
+    save_pickle('spammer_dict', spammer_dict)
     
     # Close the connection
     mail.close()
@@ -135,15 +162,27 @@ if option == 1:
     message_list = []
     from_list = []
     from_list_mail = []
-
+    spammer_dict = load_pickle('spammer_dict')
+    
     for usernm in users_dic:
         delete_trash_messages(usernm, users_dic[usernm][0], users_dic[usernm][1])
 
 elif option == 2:
     message_list = load_pickle('message_list')
     from_list = load_pickle('from_list')
+    spammer_dict = load_pickle('spammer_dict')
+    print('-----------Messages-------------')
     for mssg in message_list:
         print(mssg, '\n\n')
+    print('-----------Senders-------------')
+    for frm in from_list:
+        # print(frm, '\n')
+        pass
+    print('-----------Spammers-------------')
+    for spammer in spammer_dict:
+        print(spammer, spammer_dict[spammer])
+    
+    
 
 elif option == 3:
     # Creates list of characters in string and sorts them by occurance
@@ -165,8 +204,6 @@ elif option == 3:
         my_lst.append([char_dic[k], k])
     my_lst.sort()
     print(my_lst)
-
-    
 
 
 
