@@ -28,7 +28,7 @@ users_dic = {
 }
 imap_ssl_port = 993
 
-pth = '/PATH/TO/YOUR/FOLDER/'  # Has to be defined because of debug bug
+# pth = '/PATH/TO/YOUR/FOLDER/'  # Has to be defined because of debug bug
 
 
 def save_pickle(file, data1):
@@ -54,11 +54,11 @@ def load_pickle(fl_nm):
 
 
 forbidden_words = [
-    'casino', 'online casios'
+    'casino', 'Casino', 'online casios', ' porn ', 'Online Slot ', 'cialis',
     'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'Hello. And Bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
-    'growth service, which increases', 
-    '.ru>', 
+    'growth service, which increases', 'rebuild or revamp ',
+    '.ru>', '.ru/', '.ru ',
 ]
 #  '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
 
@@ -120,7 +120,7 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
             print('-------- DELETED: Same Author ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
-        elif from_str2 in from_list_mail or from_str2 in spammer_list:
+        elif from_str2 in from_list_mail:
             print('Body:', msg_body)
             print('-------- DELETED: Same Author Mail ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
@@ -128,6 +128,11 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         elif from_str2 in spammer_list:
             print('Body:', msg_body)
             print('-------- DELETED: Known Spammer ----------\n\n')
+            mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True
+        elif msg_body.count('http') > 2 and 'WordPress' not in msg_body:
+            print('Body:', msg_body)
+            print('-------- DELETED: 3+links ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         else:
@@ -155,9 +160,9 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     mail.logout()
 
 
-option = 1
+option = 3
 if option == 1:
-    time.sleep(5)
+    # time.sleep(5)
     # message_list = load_pickle('message_list')
     message_list = []
     from_list = []
@@ -181,10 +186,21 @@ elif option == 2:
     print('-----------Spammers-------------')
     for spammer in spammer_dict:
         print(spammer, spammer_dict[spammer])
-    
-    
 
 elif option == 3:
+    # spam servers
+    spammer_dict = load_pickle('spammer_dict')
+    server_dict = {}
+    for spammer in spammer_dict:
+        spammer = spammer.split('@')[1]
+        if spammer not in server_dict:
+            server_dict[spammer] = 1
+        else:
+            server_dict[spammer] += 1
+    for serv in server_dict:
+        print(serv, server_dict[serv])
+
+elif option == 4:
     # Creates list of characters in string and sorts them by occurance
     foo = '''
 Заказать   парсинг пользователей. 
@@ -273,10 +289,6 @@ mail.logout()
 time.sleep(1)
 
 
-
-
-
-
 from aspose.email import SaveOptions, MboxrdStorageReader
 
 # Read the storage file
@@ -302,8 +314,6 @@ reader.dispose()
 
 exit()
 import imapclient
-import datetime
-
 
 # Connect to the IMAP server
 imap_server = imapclient.IMAPClient('imap.XXXXXX.XX:993')
@@ -317,13 +327,9 @@ folders = imap_server.list_folders()
 print(folders)
 
 
-
 exit()
-# Importing libraries
-import imaplib, email
- 
 
- 
+
 # Function to get email content part i.e its body part
 def get_body(msg):
     if msg.is_multipart():
@@ -387,9 +393,4 @@ for msg in msgs[::-1]:
  
             except UnicodeEncodeError as e:
                 pass
-
-
-
-
 '''
-
