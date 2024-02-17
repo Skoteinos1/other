@@ -28,7 +28,7 @@ users_dic = {
 }
 imap_ssl_port = 993
 
-# pth = '/PATH/TO/YOUR/FOLDER/'  # Has to be defined because of debug bug
+pth = '/PATH/TO/YOUR/FOLDER/'  # Has to be defined because of debug bug
 
 
 def save_pickle(file, data1):
@@ -54,13 +54,19 @@ def load_pickle(fl_nm):
 
 
 forbidden_words = [
-    'casino', 'Casino', 'online casios', ' porn ', 'Online Slot ', 'cialis',
-    'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'Hello. And Bye.',
+    'casino', 'online casios', ' porn ', 'online slot ', 'cialis', 'captcha',
+    'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'hello. and bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
-    'growth service, which increases', 'rebuild or revamp ',
-    '.ru>', '.ru/', '.ru ',
+    'growth service, which increases', 'rebuild or revamp ', 'backlink', 'marketing', ' seo ', 
+    '.ru>', '.ru/', '.ru ', '.xyz',
 ]
 #  '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+forbidden_servers = [
+    'mail.ru', 'yandex.ru', 'bk.ru', 'rambler.ru', 'list.ru', 'arenaigr.ru',
+    'course-fitness.com', 
+    '.xyz', '.fun',
+]
+
 
 
 def delete_trash_messages(usr, passwd, imap_ssl_host):
@@ -71,7 +77,10 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     global spammer_dict
 
     spammer_list = list(spammer_dict.keys())
-
+    mail_and_server_list = []
+    for user in users_dic:
+        mail_and_server_list.append(user)
+        mail_and_server_list.append(user.split('@')[1])
     
     # Set up the IMAP connection
     mail = imaplib.IMAP4_SSL(imap_ssl_host)
@@ -88,6 +97,11 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         email_message = email.message_from_bytes(data[0][1])
         from_str = str(email_message['From'])
         from_str2 = re.search(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", from_str).group()
+        from_user = from_str2.split('@')
+        from_user[0] = from_user[0].replace('.', '')
+        from_user[0] = from_user[0].lower()
+        from_user[0] = from_user[0].split('+')[0]
+        from_str2 = '@'.join(from_user)
 
         print('From:', from_str)
         print('Subject:', email_message['Subject'])
@@ -96,11 +110,20 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         msg_body = msg_body.replace('\n', '')
         msg_body = msg_body.replace('\r', '')
         msg_body = msg_body.strip()
+        msg_body2 = msg_body.lower()
+        for m_a_s in mail_and_server_list:
+            msg_body2 = msg_body2.replace(m_a_s, '')
+
         # print('Body:', msg_body)
         # print()
 
         msg_deleted = False
-        if any(x in msg_body for x in forbidden_words):
+        if any(from_str2.endswith(x) for x in forbidden_servers):
+            print('Body:', msg_body)
+            print('-------- DELETED: Forbidden Server----------\n\n')
+            mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True            
+        elif any(x in msg_body2 for x in forbidden_words):
             print('Body:', msg_body)
             print('-------- DELETED: Forbidden Word----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
@@ -110,7 +133,7 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
             print('-------- DELETED: FROM Forbidden Word----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')    
             msg_deleted = True
-        elif msg_body in message_list:
+        elif msg_body2 in message_list:
             print('Body:', msg_body)
             print('-------- DELETED: Same message ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
@@ -136,7 +159,7 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         else:
-            message_list.append(msg_body)
+            message_list.append(msg_body2)
             from_list.append(from_str)
             from_list_mail.append(from_str2)
         if msg_deleted:
