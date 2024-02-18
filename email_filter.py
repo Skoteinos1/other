@@ -183,9 +183,8 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     mail.logout()
 
 
-option = 3
+option = 1
 if option == 1:
-    # time.sleep(5)
     # message_list = load_pickle('message_list')
     message_list = []
     from_list = []
