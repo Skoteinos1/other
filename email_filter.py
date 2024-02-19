@@ -54,7 +54,7 @@ def load_pickle(fl_nm):
 
 
 forbidden_words = [
-    'casino', 'online casios', ' porn ', 'online slot ', 'cialis', 'captcha',
+    'casino', 'online casios', ' porn ', ' dating ', 'online slot ', 'cialis', 'captcha', ' exclusive ',
     'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'hello. and bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
     'growth service, which increases', 'rebuild or revamp ', 'backlink', 'marketing', ' seo ', 
@@ -183,7 +183,7 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     mail.logout()
 
 
-option = 1
+option = 2
 if option == 1:
     # message_list = load_pickle('message_list')
     message_list = []
@@ -198,9 +198,20 @@ elif option == 2:
     message_list = load_pickle('message_list')
     from_list = load_pickle('from_list')
     spammer_dict = load_pickle('spammer_dict')
+    word_count = {}
     print('-----------Messages-------------')
     for mssg in message_list:
         print(mssg, '\n\n')
+        words = mssg.replace('.', '')
+        words = words.replace('\\', '')
+        words = words.replace(',', '')
+        words = words.replace(':', '')
+        words = words.split(' ')
+        for word in words:
+            if word in word_count:
+                word_count[word] += 1
+            else:
+                word_count[word] = 1
     print('-----------Senders-------------')
     for frm in from_list:
         # print(frm, '\n')
@@ -208,6 +219,13 @@ elif option == 2:
     print('-----------Spammers-------------')
     for spammer in spammer_dict:
         print(spammer, spammer_dict[spammer])
+    word_list = []
+    for word in word_count:
+        if word_count[word] > 1 and word not in ['to', 'the', 'and', 'your', 'you', 'a', '', 'for', 'of', 'on', 'is', 'in', 'with', 'we',  'are',  'this',  'our',  'i',  'that',  'from',  'can',  'all',  'as',  'my',  'me',  'it',  'be',  'an',  'have',  'us',  'not',  'if',  'or',  'do',  'at',  'what',  'am',  'get',  'every',  'about', 'would', 'want', 'they', 'so', 'hi', 'where', 'was', '','',]:
+            word_list.append([word_count[word], word])
+    word_list.sort(reverse=True)
+    for i in range(len(word_list)):
+        print(word_list[i])
 
 elif option == 3:
     # spam servers
