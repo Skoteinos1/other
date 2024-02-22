@@ -103,6 +103,11 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         from_user[0] = from_user[0].split('+')[0]
         from_str2 = '@'.join(from_user)
 
+        # mark as read
+        if any('wordpress@' + x == from_str2 for x in mail_and_server_list):
+            status, data = mail.fetch(num, '(RFC822)')
+            continue
+
         print('From:', from_str)
         print('Subject:', email_message['Subject'])
         # print('Date:', email_message['Date'])
@@ -122,7 +127,12 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
             print('Body:', msg_body)
             print('-------- DELETED: Forbidden Server----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
-            msg_deleted = True            
+            msg_deleted = True     
+        elif from_str2 in spammer_list:
+            print('Body:', msg_body)
+            print('-------- DELETED: Known Spammer ----------\n\n')
+            mail.store(num, '+FLAGS', '\\Deleted')
+            msg_deleted = True       
         elif any(x in msg_body2 for x in forbidden_words):
             print('Body:', msg_body)
             print('-------- DELETED: Forbidden Word----------\n\n')
@@ -146,11 +156,6 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         elif from_str2 in from_list_mail:
             print('Body:', msg_body)
             print('-------- DELETED: Same Author Mail ----------\n\n')
-            mail.store(num, '+FLAGS', '\\Deleted')
-            msg_deleted = True
-        elif from_str2 in spammer_list:
-            print('Body:', msg_body)
-            print('-------- DELETED: Known Spammer ----------\n\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif msg_body.count('http') > 2 and 'WordPress' not in msg_body:
@@ -221,12 +226,12 @@ elif option == 2:
         print(spammer, spammer_dict[spammer])
     word_list = []
     for word in word_count:
-        if word_count[word] > 1 and word not in ['to', 'the', 'and', 'your', 'you', 'a', '', 'for', 'of', 'on', 'is', 'in', 'with', 'we',  'are',  'this',  'our',  'i',  'that',  'from',  'can',  'all',  'as',  'my',  'me',  'it',  'be',  'an',  'have',  'us',  'not',  'if',  'or',  'do',  'at',  'what',  'am',  'get',  'every',  'about', 'would', 'want', 'they', 'so', 'hi', 'where', 'was', '','',]:
+        if word_count[word] > 1 and word not in ['', '', '', 'a', 'about', 'all', 'am', 'an', 'and', 'are', 'as', 'at', 'be', 'can', 'do', 'every', 'for', 'from', 'frоm', 'get', 'have', 'hi', 'i', 'if', 'in', 'is', 'it', 'me', 'my', 'not', 'nоt', 'of', 'on', 'or', 'our', 'so', 'that', 'the', 'they', 'this', 'thе', 'to', 'us', 'want', 'was', 'we', 'what', 'where', 'with', 'would', 'wе', 'you', 'your', 'а', 'аm', 'аnd']:    
             word_list.append([word_count[word], word])
     word_list.sort(reverse=True)
     for i in range(len(word_list)):
         print(word_list[i])
-
+        
 elif option == 3:
     # spam servers
     spammer_dict = load_pickle('spammer_dict')
@@ -239,6 +244,7 @@ elif option == 3:
             server_dict[spammer] += 1
     for serv in server_dict:
         print(serv, server_dict[serv])
+       
 
 elif option == 4:
     # Creates list of characters in string and sorts them by occurance
@@ -264,6 +270,7 @@ elif option == 4:
 
 
 '''
+
 CODE WHICH I TESTED
 
 # print(a[0][1].decode("utf-8"))
@@ -275,9 +282,6 @@ import imaplib
 import base64
 import os
 import re
-
-
-
 
 # if need to restrict mail search.
 criteria = {}
