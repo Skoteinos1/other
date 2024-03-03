@@ -104,13 +104,11 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         from_str2 = '@'.join(from_user)
 
         # mark as read
-        if any('wordpress@' + x == from_str2 for x in mail_and_server_list):
+        # if any('wordpress@' + x == from_str2 for x in mail_and_server_list):
+        if any(x in from_str2 for x in mail_and_server_list):            
             status, data = mail.fetch(num, '(RFC822)')
             continue
 
-        print('From:', from_str)
-        print('Subject:', email_message['Subject'])
-        # print('Date:', email_message['Date'])
         msg_body = email_message.get_payload()
         msg_body = msg_body.replace('\n', '')
         msg_body = msg_body.replace('\r', '')
@@ -124,43 +122,43 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
 
         msg_deleted = False
         if any(from_str2.endswith(x) for x in forbidden_servers):
-            print('Body:', msg_body)
-            print('-------- DELETED: Forbidden Server----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], )  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Forbidden Server----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True     
         elif from_str2 in spammer_list:
-            print('Body:', msg_body)
-            print('-------- DELETED: Known Spammer ----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], )  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Known Spammer ----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True       
         elif any(x in msg_body2 for x in forbidden_words):
-            print('Body:', msg_body)
-            print('-------- DELETED: Forbidden Word----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Forbidden Word ---------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif any(x in from_str for x in forbidden_words):
-            print('Body:', msg_body)
-            print('-------- DELETED: FROM Forbidden Word----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('------ DELETED: FROM Forbidden Word ------\n')
             mail.store(num, '+FLAGS', '\\Deleted')    
             msg_deleted = True
         elif msg_body2 in message_list:
-            print('Body:', msg_body)
-            print('-------- DELETED: Same message ----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Same message ----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif email_message['From'] in from_list:
-            print('Body:', msg_body)
-            print('-------- DELETED: Same Author ----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Same Author ----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif from_str2 in from_list_mail:
-            print('Body:', msg_body)
-            print('-------- DELETED: Same Author Mail ----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('-------- DELETED: Same Author Mail ----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif msg_body.count('http') > 2 and 'WordPress' not in msg_body:
-            print('Body:', msg_body)
-            print('-------- DELETED: 3+links ----------\n\n')
+            print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
+            print('-------- DELETED: 3+links ----------\n')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         else:
@@ -174,7 +172,6 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
             else:
                 spammer_dict[from_str2][0] = datetime.datetime.date(datetime.datetime.today())
                 spammer_dict[from_str2][1] += 1
-
         print()
         # mail.expunge()
 
