@@ -57,8 +57,8 @@ forbidden_words = [
     'casino', 'online casios', ' porn ', ' dating ', 'online slot ', 'cialis', 'captcha', ' exclusive ',
     'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'hello. and bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
-    'growth service, which increases', 'rebuild or revamp ', 'backlink', 'marketing', ' seo ', 
-    '.ru>', '.ru/', '.ru ', '.xyz',
+    'growth service, which increases', 'rebuild or revamp ', 'backlink', 'marketing', ' seo ', ' loan ',
+    '.ru>', '.ru/', '.ru ', '.xyz', 'si=c4=99', 
 ]
 #  '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
 forbidden_servers = [
@@ -123,42 +123,42 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
         msg_deleted = False
         if any(from_str2.endswith(x) for x in forbidden_servers):
             print('From:', from_str, '\nSubject:', email_message['Subject'], )  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Forbidden Server----------\n')
+            print('-------- DELETED: Forbidden Server----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True     
         elif from_str2 in spammer_list:
             print('From:', from_str, '\nSubject:', email_message['Subject'], )  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Known Spammer ----------\n')
+            print('-------- DELETED: Known Spammer ----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True       
         elif any(x in msg_body2 for x in forbidden_words):
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Forbidden Word ---------\n')
+            print('-------- DELETED: Forbidden Word ---------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif any(x in from_str for x in forbidden_words):
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('------ DELETED: FROM Forbidden Word ------\n')
+            print('------ DELETED: FROM Forbidden Word ------')
             mail.store(num, '+FLAGS', '\\Deleted')    
             msg_deleted = True
         elif msg_body2 in message_list:
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Same message ----------\n')
+            print('-------- DELETED: Same message ----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif email_message['From'] in from_list:
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Same Author ----------\n')
+            print('-------- DELETED: Same Author ----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif from_str2 in from_list_mail:
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('-------- DELETED: Same Author Mail ----------\n')
+            print('-------- DELETED: Same Author Mail ----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         elif msg_body.count('http') > 2 and 'WordPress' not in msg_body:
             print('From:', from_str, '\nSubject:', email_message['Subject'], '\nBody:', msg_body)  # print('Date:', email_message['Date'])
-            print('-------- DELETED: 3+links ----------\n')
+            print('-------- DELETED: 3+links ----------')
             mail.store(num, '+FLAGS', '\\Deleted')
             msg_deleted = True
         else:
@@ -185,7 +185,7 @@ def delete_trash_messages(usr, passwd, imap_ssl_host):
     mail.logout()
 
 
-option = 2
+option = 1
 if option == 1:
     # message_list = load_pickle('message_list')
     message_list = []
@@ -223,7 +223,7 @@ elif option == 2:
         print(spammer, spammer_dict[spammer])
     word_list = []
     for word in word_count:
-        if word_count[word] > 1 and word not in ['', '', '', 'a', 'about', 'all', 'am', 'an', 'and', 'are', 'as', 'at', 'be', 'can', 'do', 'every', 'for', 'from', 'frоm', 'get', 'have', 'hi', 'i', 'if', 'in', 'is', 'it', 'me', 'my', 'not', 'nоt', 'of', 'on', 'or', 'our', 'so', 'that', 'the', 'they', 'this', 'thе', 'to', 'us', 'want', 'was', 'we', 'what', 'where', 'with', 'would', 'wе', 'you', 'your', 'а', 'аm', 'аnd']:    
+        if word_count[word] > 3 and word not in ['', '', '', 'a', 'about', 'all', 'am', 'an', 'and', 'are', 'as', 'at', 'be', 'can', 'do', 'every', 'for', 'from', 'frоm', 'get', 'have', 'hi', 'i', 'if', 'in', 'is', 'it', 'me', 'my', 'not', 'nоt', 'of', 'on', 'or', 'our', 'so', 'that', 'the', 'they', 'this', 'thе', 'to', 'us', 'want', 'was', 'we', 'what', 'where', 'with', 'would', 'wе', 'you', 'your', 'а', 'аm', 'аnd']:    
             word_list.append([word_count[word], word])
     word_list.sort(reverse=True)
     for i in range(len(word_list)):
