@@ -15,7 +15,6 @@ If you want to block korean, russian, chinesse... language, just add their spam 
 Then add those characters into 'forbidden_words'
 '''
 
-import time
 import imaplib
 import email
 import pickle
