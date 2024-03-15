@@ -4,7 +4,7 @@ This code removes spam. and keeps itself "autoupdated". It ignores SEEN emails. 
 option = 1
 Reads unseen emails. It removes everything which contains forbidden words, everything with same body or from same sender. And flags them as spammers.
 Once Somebody is flagged as spammer, all his messages will be deleted.
-So if Mr. Spammer send you an email his first will be kept, rest of his emails from all your acounts will be deleted. Just keep first mail as UNREAD. 
+So if Mr. Spammer send you an email his first will be kept, rest of his emails from all your acounts will be deleted. 
 Also stores content of mails in pickle
 
 option = 2
