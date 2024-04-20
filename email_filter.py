@@ -4,7 +4,7 @@ This code removes spam. and keeps itself "autoupdated". It ignores SEEN emails. 
 option = 1
 Reads unseen emails. It removes everything which contains forbidden words, everything with same body or from same sender. And flags them as spammers.
 Once Somebody is flagged as spammer, all his messages will be deleted.
-So if Mr. Spammer send you an email his first will be kept, rest of his emails from all your acounts will be deleted. 
+So if Mr. Spammer send you an email his first will be kept, rest of his emails from all your acounts will be deleted. Just keep first mail as UNREAD. 
 Also stores content of mails in pickle
 
 option = 2
@@ -53,7 +53,7 @@ def load_pickle(fl_nm):
 
 
 forbidden_words = [
-    'casino', 'online casios', ' porn ', ' dating ', 'online slot ', 'cialis', 'captcha', ' exclusive ',
+    'casino', 'online casios', ' porn ', ' dating ', 'online slot ', 'cialis', 'captcha', ' exclusive ', ' my intimate photos',
     'akartam tudni az árát', 'eisiau gwybod eich pris', 'makemake wau', 'hello. and bye.',
     'ვ', 'ნ', 'и', 'п', 'л', 'ш', 'д', 'ь', '=?UTF-8?B?', '라', '어', '에', '원', '고', '기', '는', '다',
     'growth service, which increases', 'rebuild or revamp ', 'backlink', 'marketing', ' seo ', ' loan ',
