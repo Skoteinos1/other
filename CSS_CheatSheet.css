@@ -64,3 +64,70 @@ h1{      color:   red;}
 - styl nastaveny v browseri
 - styl vytvoreny uzivatelom
 */
+
+/* ------------------ Working with text -----------------
+<p class="serif">Text</p>
+class: serif sanserif monospace cursive fantasy*/ 
+
+p.serif{font-family: "Times New Roman", Times, serif;} /* Ked ma nazov viac slov oznacujeme "" */
+p.sanserif{font-family: Arial, Helvetica, sans-serif;}
+body{font-family: Arial, "Helvetica Nueve", Helvetica, sans-serif;} /* Zadavame viac fontov ak by uzivatel nemal nejaky nainstalovany
+Polsedna moznost je jedna zo zakladnych fontov */
+
+/* Velkost pisma 
+<p class="small">Text</p>
+class: medium large xlarge*/
+p.small{font-size: small;} /* medium large x-large
+velkost mozeme urcit aj v pixeloch a em (em=16px)*/
+h1{font-size: 20px; font-size: 1.25em;}
+
+/* Font Style
+<p class="normal">Text</p>
+class: normal
+italic - html tag <i></i>
+olique-less supported, similar to italic */
+p.normal{font-size: normal;}
+
+/* Font Weight
+light bold bolder <strong></strong>*/
+p.light{font-weight: lighter; font-weight: 700;} /* bold bolder, ciselne 100-900, 400 normal, 700 bold */
+
+/*Font Variant
+normal small-caps inherit */
+p.normal{font-variant: normal;} /* small-caps inherit.  small-caps treba otestovat, nieje vsade podporovany */
+
+/* color */
+h1{color: #0000FF; color: rgb(255,0,0); color:green;}
+
+/* text align Horizontally */
+p.example{text-align: left;} /* left right center justify */
+
+/* text align Verticaly */
+p.example{vertical-align: top;} /* top middle bottom baseline(normal) sub super -10px
+nefunguje pre vsetky elementy rovnako, div poterbuju dalsie styly*/
+
+/* <div class="main">
+    <div class="paragraph">
+        Text
+    </div>
+</div> */
+.main{
+    height: 150px; width: 400px;
+    background-color: lightskyblue;
+    display: inline-table;}
+.paragraph{
+    display: table-cell;
+    vertical-align: middle;}
+p{
+    text-decoration: none; /* nic */
+    text-decoration: inherit; /* to iste co parent element */
+    text-decoration: overline; /* ciara nad */
+    text-decoration: underline; /* podciarknute */
+    text-decoration: line-through; /* preskrtnute */
+    text-decoration: blink; /* blika, vela browserov ignoruje*/
+}
+
+/* Odsadenie prveho riadku */
+p{text-indent: 60px;} /* mozme pouzit aj px, pc, pt, cm, mm, in, em, %, inherit*/
+
+/* Tien */
