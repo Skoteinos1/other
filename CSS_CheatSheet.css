@@ -1,0 +1,66 @@
+/*CSS - Cascading Style Sheets
+Vsetko formatovanie by malo byt vybrate z  HO dokumentu a vlozene v css subore
+
+inline css - formatovanie priamo v texte
+<p style="color:white; background-color:gray;">Example of inline</p>
+
+embeded/internal - je v head of HTML
+<html>
+    <head>
+        <style>
+            p{
+                color:white;
+                background-color:gray;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Nejaky text</p>
+    </body>
+</html>
+
+External CSS - v externom subore
+<head>
+    <link ref="stylesheet" href="example.css">
+</head>
+*/
+
+/* koment */
+/*
+-webkit-xxx
+-mox-xxx
+-ms-xxx
+-o-xxx
+xxx    - neprefixovany kod na koniec, pretoze comu nerozumie preskakuje a posledne plati
+
+Styl ma 3 casti
+selector property value*/
+h1{      color:   red;}
+
+/* <div id="intro">     ID mozme pouzit len raz
+    <p>Paragraf</p>
+  </div>
+  <p>Druhy paragraf</p>
+  <p class="first">Treti paragraf</p>   class mozme pouzit kolko chceme*/
+
+/*CSS*/
+#intro{ /* # oznacuje ID */
+    color:white;
+    background-color:gray;
+}
+.first{ /* . oznacuje class */
+    font-size:200%;
+}
+
+/* <div id="intro">
+    <p class="first">Treti <em> EMPHASIS </em></p>
+</div> */
+#intro .first em{
+    /* cielene len na em cast triedy first v id intro*/
+    color:black;}
+
+/* Stranky mozu vyzerat trojako:
+- styl vytvoreny autorom
+- styl nastaveny v browseri
+- styl vytvoreny uzivatelom
+*/
