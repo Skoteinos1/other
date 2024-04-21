@@ -128,6 +128,47 @@ p{
 }
 
 /* Odsadenie prveho riadku */
-p{text-indent: 60px;} /* mozme pouzit aj px, pc, pt, cm, mm, in, em, %, inherit*/
+p{text-indent: 60px;} /* mozme pouzit aj: px, pc, pt, cm, mm, in, em, %, inherit*/
 
-/* Tien */
+/* Tien
+mozme ich priradit aj viac
+text-shadow: 5px 2px 4px grey;  X, Y, blur efekt, farba
+IExplorer 9 a starsie nepodporuju text-shadow */
+p{text-shadow: 5px 2px 4px grey;} /* mozme pouzit aj: px, pc, pt, cm, mm, in, em, %, inherit*/
+
+/* Text Transform */
+p{text-transform: capitalize; /* Prve pismeno velke */
+    text-transform: uppercase; /* Vestko velke */
+    text-transform: lowercase; /* vsetko male */
+    text-transform: none; /* bez efektu */}
+
+/* Letter spacing - medzery  m e d z i  pismenami*/
+p{letter-spacing: normal;} /* normal, inherit, mozme pouzit aj: px, pc, pt, cm, mm, in, em, %,  kladne aj zaporne cisla */
+
+/* word-spacing - to  iste  co letter-spacing  ale  so  slovami*/
+/* mozme pouzit aj: px, pc, pt, cm, mm, in, em, %,  kladne aj zaporne cisla */
+
+/* White-space: */
+p{ white-space: inherit; /* ako parent */
+    white-space: normal; /* normalne */
+    white-space: nowrap; /* vsetko v jednom riadku az po </br> tag */
+    white-space: pre; /* text wrapuje na line break a white space */
+    white-space: pre-line; /* text wrapuje na line break ale ignoruje white space */
+    white-space: pre-wrap; /* podobne ako pre, ale nedovoli vyjst textu z okna*/}
+
+/* ---------- Properties --------------
+BOX Model: MARIGN BORDER PADDING CONTENT
+Properties work in same order: TOP RIGHT BOTTOM LEFT
+Celkova sirka: L+R Margin + L+R Border + L+R Margin + Content Width*/
+p{ padding: 10px;
+    border: 5px solid green;
+    border-color: blue; /* #FF6600, rgb(0,153,0) */
+    border-style: solid; /* none dotted dashed double groove ridge inset outset hidden*/
+    border-width: 5px;}
+/* Nemusi byt cely rovnaky, mozeme definovat aj kazdu stranu zvlast*/
+p{
+    border-top-style: dashed;
+    border-bottom-style: dotted;
+    border-left-color: red;
+    border-right-width: 10px;
+}
