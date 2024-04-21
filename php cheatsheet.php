@@ -225,5 +225,58 @@ Premenne ostavaju kym neukonci session alebo odstranim rucne session_unset()
 alebo znicime session_destroy()
 
 ---------------- COOKIE ---------------------------
+setcookie(meno, hodnota, expiracia v sek, cesta, domena, secure, httponly);
+expiracia - time() + 86400*30 - 30 dni, 0 - po koniec session_abort
+cesta: "/" - available pre celu domenu
+cesta: "/php" - len pre php priecinok a podpriecinky
+domena - aby bol pristupny pre domenu
+secure - TRUE - pristupne len cez https protokol
+httponly - TRUE - len cez http protokol. nepristupna pre skripty. (reduce identity theft using xss attacks)
 
+<?php
+$value = 'something';
+setcookie("user", $value, time()+86400, "/", "example.com", 1);
+if(isset($_COOKIE['user'])){echo "Value is: ".$_COOKIE['user'];}
+// setcookie pred HTML tag. NIKDY neukladat citlive info do cookies
+?>
 
+<?php
+// -------------------- Working with Files -----------------------
+$myfile = fopen("file.txt", "w");
+$txt = "John\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+
+/*
+r - read only
+w - wrtie only - zmaze obsah a vytvori ak neexistuje
+a - wrtie only
+x - creates new file for write only
+r+ - opens for read write
+w+ - opens for read write, zmaze obsah a vytvori ak neexistuje
+a+ - opens for read write, vytvori ak neexistuje
+x+ - creates new file for read/write
+*/
+
+// Appending to file
+// vsetko v $_POST['text'] sa zapise do suboru
+// The isset function determined whether the form had been submited as well as whether the text contained a value.
+if(isset($_POST['text'])){
+    $name = $_POST['text'];
+    $handle = fopen('names.txt', 'a');
+    fwrite($handle, $name."\n");
+    fclose($handle);
+}
+?>
+<form method="post">
+Name:<input type="text" name="text"/>
+<input type="submit" name="submit"/>
+</form>
+
+<?php
+// Reading - Nacita subor, ku riadkom pristupuje ako ku clenom pola
+$read = file('names.txt'); // mozno [] namiesto ()
+for each($read as $line){
+    echo $line."\n";
+}
+?>
