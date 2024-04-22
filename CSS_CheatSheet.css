@@ -172,3 +172,18 @@ p{
     border-left-color: red;
     border-right-width: 10px;
 }
+
+/* Celkova velkost div elementu
+VElkost mozeme urcit aj v % a min max velkosti */
+div{
+    min-width: 10%;
+    min-height: 100px;
+    max-width: 100%;
+    max-height: 300px;}
+
+/* Background */
+p{
+    background-color: blue;
+    background-image: url("img.png"); /* mozme mat viac obrazkov, treba oddelit ciarkami*/
+    background-repeat: repeat-x; /* dlazdice vedla seba */
+}
