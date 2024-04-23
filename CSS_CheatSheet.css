@@ -185,5 +185,55 @@ div{
 p{
     background-color: blue;
     background-image: url("img.png"); /* mozme mat viac obrazkov, treba oddelit ciarkami*/
-    background-repeat: repeat-x; /* dlazdice vedla seba */
+    background-repeat: repeat-x; /* dlazdice vedla seba ... repeat-y, no-repaet, inherit */ }
+
+/* Styling the lists
+<ol class="lower-alpha">
+    <li>red</li>
+    <li>green</li>
+    <li>blue</li>
+</ol>
+2 typy - unordered lists <ul>  a ordered lists <ol> */
+ol.lower-alpha{
+    list-style-type: lower-alpha; /* a. b. c. */
+    list-style-type: circle; /* kruzky */
+    list-style-type: square; /* stvorceky */
+    list-style-image: url("logo.jpg"); /* obrazok vsade */
+    list-style-position: inside; /* otside je default */
+    list-style: square outside none; /* v jednom riadku
+                typ    posit.  img */
 }
+
+/* Tabulka - Table */
+table{
+    border-collapse: collapse; /* Ci je ciara medzi bunkami spojena alebo rozdelna*/
+    border-spacing: 0cm; /* urcuje ako daleko od seba su bunky pri rozdelenej ciare*/
+}
+/*<table border="1">
+    <tr>
+        <td>A</td>
+        <td>B</td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>D</td>
+    </tr>
+</table>
+<caption>Nazov</caption>*/
+table{
+    border-collapse: separate;
+    border-spacing: 20px 40px;
+    caption-side: top;  /* bottom */}
+/* Prazdne bunky mozeme urcit ci zobrazime oramovane */
+table{
+    empty-cells: show; /* hide */
+    table-layout: auto; /* auto - samo si urci velkost bunky, fixed -my urcime velkost bunky */}
+
+/* Styling links
+<a href="https://google.com" target="_blank">THIS IS LINK</a>*/
+a:link{} /* normalne nenavstivene linky */
+a:visted{} /* navstivene linky */
+a:hover{color: red;} /* nad ktorymi je mys,  musi byt za a:link a a:visited*/
+a:active{} /* staven sa active po kliknuti, Musi byt ... ???? z alebo 2 ??? */
+a{text-decoration: none; /* odobera podciarknutie linku */}
+
