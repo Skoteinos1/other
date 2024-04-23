@@ -229,7 +229,7 @@ table{
     empty-cells: show; /* hide */
     table-layout: auto; /* auto - samo si urci velkost bunky, fixed -my urcime velkost bunky */}
 
-/* Styling links
+/* -------------- Styling links -----------------
 <a href="https://google.com" target="_blank">THIS IS LINK</a>*/
 a:link{} /* normalne nenavstivene linky */
 a:visted{} /* navstivene linky */
@@ -237,3 +237,79 @@ a:hover{color: red;} /* nad ktorymi je mys,  musi byt za a:link a a:visited*/
 a:active{} /* staven sa active po kliknuti, Musi byt ... ???? z alebo 2 ??? */
 a{text-decoration: none; /* odobera podciarknutie linku */}
 
+/* ---------------- Mouse Cursor style ----------------
+<span style="cursor:help;">Text</span>
+auto, crosshair, default, move, help, text, wait, n-resize s-resize ne-resize, sw-resize (nw se e w)
+pointer, progress, not-allowed, no-drop, col-resize row-resize vertical-text all-scroll
+Ked dame kurzor na default, uzivatel nemusi vydiet linky, zle pouzite linky mozu byt zavadzajuce*/
+
+/* --------------  Positioning and layout ----------------
+Every element on page is rectangular box
+display: block, inline, none, list-item, table, table-cell, table-column, grid
+visibility:hidden - podobne ako display:none ale hidden bude stale zaberat miesto
+
+Positioning */
+p{ position: static; /* Polohoa od predchadzajuceho elementu, nie celkovo na stranke */
+    position: fixed; /* Poloha vzhladom k oknu, nepohne sa ani ked uzivatel scrolluje */
+    position: relative; /* Poloha vzhladom k "normalnej" polohe elementu. Teda k miestu, kde by to malo byt normalne zobrazene */
+    position: absolute; /* vzhladom k first parent elementu */
+    top:30px; right:5px;}
+
+/* Floating  - zarovnanie, iba v pravo a lavo */
+img{ float: left;
+    width: 120px;
+    margin-right: 10px;} /* dobre na urcenie hranice od ktorej moze byt zobrazeny text aby sa hned nedotykal obrazku */
+
+/* Clear property - urcuje stranu elementu, kde ine float elementy nemozu byt
+<div class="floating">
+    <p>Text</p>
+</div>
+text<br/>
+<br class="clearing" />
+text<br/> */
+.floating{float: right;}
+.clearing{clear: both;} /* right, left both */
+
+/* overflow property
+Kazdy element je box. Ak velkost nieje dana, vyska sa bude prisposobovat obsahu. Overfkiw urcuje co sa bude diat ak obsah presiahne velkost. */
+p{overflow: visible; /* normal */
+overflow: scroll; /* scrollbary */
+overflow: hidden; /* co je mimo, nevidno */
+overflow: auto; /* if overflow is clipped, a scroll-bar ???? be added to make it possible to see the rest of content */}
+
+/* ---------- Z-INDEX ------------------- 
+Ak sa elementy prekrivaju, urcuje, ze ktory element bude na vrchu. Vyssie cislo je vyssie. */
+p{z-index: 5;}
+
+/* ------------------- CSS 3 Basics ----------------------
+najnovsi CSS standard, spatne kompatibilny, umoznuje Border radius, Border Images, Multiple backgrounds, box shadow,
+Animations and effects, Gradients (linear, radial)
+Transform allows rotate, scale, move, skew elements
+Transitions allows animate from 1 to another
+Animations
+
+VENDOR PREFIXES
+niekedy treba pisat kod viackrat, pre rozne browsere
+-webkit-border-radius:24px;
+
+-webkit-xxx  Safari, Chrome
+-mox-xxx    Firefox
+-ms-xxx     Internet explorer
+-o-xxx      Opera
+xxx    - neprefixovany kod na koniec, pretoze comu nerozumie preskakuje a posledne plati
+
+------ Rounded Corners --------- */
+p{ border-radius: 20px; 
+    border-radius: 0 0 20px 20px;} /* Mozeme urcit kazdy roh zvlast, tiez pouzit %
+
+/* Box Shadow */
+p{ box-shadow: 10px 10px #888888;}
+/*             posuva tien, farba   */
+p{ box-shadow: 10px 10px 5px 5px #888888;}
+/*                      blur spread
+Mozeme pouzit viaac tienov a tiez vnutorny tien. Oddelujeme ciarkou */
+p{ box-shadow:
+    inset 10px 10px 5px #888888,
+    inset -10px -10px 5px #000;}
+
+/* --------------- Transparency effect ------------------
