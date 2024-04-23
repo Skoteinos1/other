@@ -313,3 +313,33 @@ p{ box-shadow:
     inset -10px -10px 5px #000;}
 
 /* --------------- Transparency effect ------------------
+Mozeme pouzit RGBA farby rgba(RED 0-255, GREEN, BLUE, ALPHA 0-1)
+HSLA - hue 0-360, Saturation 100% je full color, lightness - 0% dark 100% light */
+h1{text-shadow: 5px 10px 2px #93968f,
+    -3px 6px 5px #58d1e3; /* Mozme mat viac tienov, oddelene ciarkou */
+    text-shadow: none; /* ak nechceme ziaden*/} 
+/* CSS2 a CSS3 maju rozdielne poradie tienov */
+
+/* ----------- Pseudo Classes ----------------
+zacinaju dvojbodkou, najcastejsie :first-child  :last-child
+<div id="parent">
+    <p>Text</p>
+    <p>Text2</p>
+    <p>Text3</p>
+</div>*/
+#parent p:first-child{
+    color: green; text-decoration: underline;}
+
+/* ------------ Pseudo Elements ------------------
+::first-line    - prvy riadok
+::first-letter  - prve pismeno
+::selection     - cast ktoru vyberie uzivatel
+::before        - pred elementom
+::after         - po elemente */
+p::first-line{ color: #589432; } /* prvy riadok zeleny */
+p::-moz-selection{ background: #845201; color: #fff;} /* zvyrazneny text, musime pouzit prefix -moz- lebo selection nieje podporovany v mozille*/
+p::before{content: url("logo.jpg");} /* obrazok na zaciatku kazdeho odstavca <p></p> */
+
+/* word-wrap: normal  break-word   rozdeli slovo ak sa nezmesti do elementu / je prilis dlhe */
+
+
