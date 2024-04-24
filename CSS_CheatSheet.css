@@ -342,4 +342,108 @@ p::before{content: url("logo.jpg");} /* obrazok na zaciatku kazdeho odstavca <p>
 
 /* word-wrap: normal  break-word   rozdeli slovo ak sa nezmesti do elementu / je prilis dlhe */
 
+/* @font-face  aby sme neboli obmadzovany len fontmi, ktore ma uzivatel v pocitaci 
+Firefox, Safari, Chrome, Opera .ttf .otf
+Internet Explorer .eot */
+@font-face {
+    font-family: Delicious;
+    font-weight: bold;
+    src: url("Delicious-Bold.otf");}
+/* Explorer ma bug, ak pouzivame viac fontov, Riesime: ?#iefix */
+@font-face { font-family: Delicious;
+    src: url("Delicious-Roman.ttf");
+    src: url("Delicious-Roman.eot?#iefix");}
+
+/* --------------------- Gradients & Backgrounds -------------------- 
+Linear Gradients - 
+background:-moz-linear-gradient(blue 20%, yellow 30%, green 85%)
+viac farieb oddelujeme ciarkou, % alebo px, mozeme urcit kde sa bude farba delit
+Mozeme urcit kde sa zacina 1. farba - top, left, bottom, righ, aj kombinacie: bottom right
+alebo uhol: linear-gradient:(100deg, blue, green):
+Moze sa opakovat:
+repeating-linear-gradient(blue, green, 20px);
+
+Radial Gradients
+background: radial-gradient(position, shape or size, color-stops);
+position - top, bottom, center, 50% 50%
+shape - ellipse(default), circle
+color-stops - can be used % , px, em
+background: -moz-radial-gradient(circle, green 40%, yellow 50%, blue 70%);
+
+Background Size
+background-size: 100px 100px - presna velkost
+contain, cover
+
+background-clip - painting area of background
+3 values: border-box (default) - To outside edge of border
+        padding-box - To outside edge of padding
+        content-box - background painted within contet box
+        - aplies also to background images
+
+Transparent Borders */
+p{ border: 20px solid rgba(0, 0, 0, 0.3);
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;}
+
+/* Multiple Backgrounds */
+div{ width: 400px; height: 300px;
+    background-image: url('logo.png'), url('logo.jpg');
+    background-position: right top, left top;
+    background-repeat: no-repeat; }
+/* Jednoduchsi zapis */
+div{ background: url('logo.png') right top no-repeat;
+    background: url('logo.jpg') left top no-repeat;}
+
+/* Opacity */
+#img1{ opacity: 0.5; /* 0 - 1 */
+/* Internet Explorer */ filter: alpha(opacity = x); /* 0 - 100 */}
+
+/* -------------- Transitions & Transforms ---------------------------
+Transitions - Allows to change from one property to another over duration */
+p{transition-property: all; /* what to be transitioned */
+    transition-duration: 1s; /* duration over which transition occur */
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); /* pace of transition */
+    /* timing-function: ease, ease-in, ease-out, ease-in-out, linear, cubic-bezzier(0,0,1,1);
+    transition-delay: 1s; /* delayt for effect */ }
+
+div{ width: 50px; height: 50px;
+    background: #32c032;
+    transition: width 3s; }
+div:hover{ width: 250px; }
+
+P{ transform: rotate(10deg); /* otoci o uhol */
+    transform-origin: 50% 50%; /* allows change position, defaul is 50% 50% => center of element */
+    transform: translate(100px, 50px); /* moves element */
+    transform: skew(30deg); /* if second parameter not specified than = 0 */
+    transform: scale(0.7, 0.7); /* zmensi velkost elementu na 70% */
+    /* mozeme mat vaci prikazov v riadku */
+    transform: rotate(45def) translate(100px);}
+
+
+@keyframes example {
+    0% {background-color: red;} /* namiesto 0% a 100% mozme from to */
+    50% {background-color: yellow;}
+    70% {background-color: blue;}
+    100% {background-color: green;} }
+div{ width: 100px; height: 100px;
+    background-color: red;
+    animation-name: example; /* potrebujeme aby fungovalo*/
+    animation-duration: 1s; }
+
+/* Animation Properties */
+p{ animation-name: meno;
+    animation-duration: 5s;
+    animation-timing-function: ease; /* ease, linear, ease-in, ease-out, ease-in-out, cubic-bezier(n,n,n,n)*/
+    animation-delay: 1s;
+    animation-iteration-count: 10; /* infinite */
+    animation-direction: normal; /* reverse, alternate, alternate reverse*/
+    /* v jednom rioadku */
+    animation: name duration timing-function delay iteration-count direction fill-mode;}
+
+/* 3D transform */
+p{transform: rotateX('angle') rotateY('angle') rotateZ('angle');
+    transform: translate3d(-22px, 4em, 10px);
+    transform: scale3d();
+    transform: rotate3d();
+    perspective: 100px; /* depth of 3D scene */ }
 
