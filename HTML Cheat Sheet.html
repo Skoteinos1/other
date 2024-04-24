@@ -1,0 +1,117 @@
+<!-- HTML - HyperText Markup Language 
+Modern Web Design
+HTML - Structure
+CSS - Presentation
+JavaScript - Behavior
+PHP or similar - Backend
+CMS - Content Management
+
+Zakladna struktura: -->
+<html>
+    <head>
+        <title>Nazov</title>
+    </head>
+    <body>
+        Text
+    </body>
+</html>
+
+HTML Basics
+
+Paragraph <p>Text</p>
+Ak chceme zacat na novom riadku: line break <br/>
+Horizontal line <hr/>
+
+Text Formating
+<b>Bold</b><strong>Rovnaky vysledok ale browser hodnoti ako dolezitejsie</strong>
+<big>big</big>
+<i>Italic</i><em>Rovnaky vysledok ale browser hodnoti ako dolezitejsie</em>
+<small>small</small>
+<sub>Dolny index</sub>
+<sup>Horny index</sup>
+<ins>Podciarknute</ins>
+<del>Preskrtnute</del>
+
+Heading <h1>TEXT</h1> .... <h6></h6>
+Nepouzivat heading na zvyraznenie textu, lebo vyhladavace na zaklade toho indexuju stranku
+
+<!--Koment-->
+
+Attributes
+Zarovnanie odstavca na stred <p align="center"></p>
+Mozeme urcit velkost elementu
+<hr width="50px" /> <hr width="50%" /> <hr width="10%" align="right" />
+
+Images
+<img src="cesta.jpg" />
+<img src="cesta.jpg" alt="alternativny text popisujuci obrazok"/>
+<img src="cesta.jpg" height="150px" width="150px"/>
+<img src="cesta.jpg" height="50%" width="50%"/>
+<img src="cesta.jpg" border="1px"/> Default je bez borderu
+
+Links
+<a href="https://www.stranka.com">Stranka</a>
+<a href="https://www.stranka.com" target="_blank">Otvori v novom okne</a>
+
+List <ol>
+    <li>RED</li>
+    <li>Green</li>
+</ol>
+ordered list ol, unordered ul (alebo il ???)
+
+Tables
+<table>
+    <tr>
+        <td>Bunka</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td bgcolor="red">cervene pozadie</td>
+        <td colspan="2">zlucene bunky</td>
+    </tr>
+</table>
+
+Inline and Block Elements
+Block elementy zacinaju na novom riadku
+<h1></h1>
+<form></form>
+<li></li>
+<ol></ol>
+<ul></ul>
+<p></p>
+<pre></pre>
+<table></table>
+<div>Pouziva sa ako kontajner pre dalsie elementy</div> ....
+inline <b></b> <a></a> <strong></strong> <img> <input> <em></em> <span>Tiez kontajner pre dalsie elementy ale inline, napr. formatovanie textu</span>
+
+Dalsie elementy
+<applet>embeded java applet</applet>
+<iframe>inline frame</iframe>
+<ins>inserted text</ins>
+<map>image map</map>
+<object>embedded object</object>
+<script>script within html document</script>
+
+GET - posle data v adrese
+POST - bezpecne posle data
+
+Form - formular
+<form action="url" method="GET">Action sa aktivuje ked uzivatel submit form , nemusi byt</form>
+<input type="radio" name="gender" value="male" />Male<br/>
+<input type="radio" name="gender" value="female" />Female<br/>
+Iba jedna moznost
+
+<input type="checkbox" /> Viac moznosti
+<input type="submit" value="Submit" />
+
+Farby - Hexformat RGB #00AABB"
+
+HTML5
+deklaracia <!DOCTYPE HTML>
+charset encoding <meta charset="UTF-8">
+new elements: article, aside, audio, canvas, datalist, details, embed, footer, header, nav, output, progress, section, video...
+Integrated API: Drag&Drop, Audio&Video, Offline Web Application, History, Local Storage, Geolocation, Web Messaging
+
+HTML5 introduces 7 main content models
+Metadata - 
