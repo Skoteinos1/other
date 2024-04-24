@@ -203,4 +203,86 @@ Drag & Drop API - any element can be draggable
     <img draggable="true" />
 
 SVG -  Scalable Vector Graphics
+<img src="image.svg" alt = " " height="300" />
+<svg width="1000" height="1000" ></svg>
 
+circle <circle cx="80" cy="80" fill="green" />
+<isvg>
+r - radius
+fill - color
+stroke - outline of circle
+
+Rectangle <rect width="300" height="100" x="20" y="20" fill="green" />
+
+Line <line x1="10" y1="10" x2="200" y2="100" style="stroke: #000000; stroke-linecap: round; stroke-width: 20;" />
+
+Polyline <polyline style="stroke-linejoin: miter; stroke: black; stroke-width: 12; fill: none;" points="100 100, 150 150, 200 100" />
+
+ellipse <ellipse cx="200" cy="100" rx="150" ry="70" style="fill: green;" />
+
+Polygon <polygon points="100 100, 200 200, 300, 0" style="fill: green; stroke: black;" />
+
+
+Animations <svg> ...</svg>
+             <rect></rect>
+               <animate attributeName="x" from="0" to="300" dur="3s" fill="freeze" repeatCount="2" />
+    fill - specifies if it should return to it's initial value
+        remove - resets value
+        freeze - keep to value
+    repeatCount - pocet opakovani, infinite
+
+Paths: M - move to
+    H - horizontal line to
+    C - curve to
+    L - line to
+    V - vertical line to
+    S - Smooth curve to
+    Q - quadratic bezier curve
+    A - Elliptical Arc
+    T - smooth quadratic bezier curve
+    Z - close Path
+<path d="M 00 C 200 200 L 200 0 2" style="stroke: #000; fill:none;" />
+    MLQ - absolute position
+    mlq - relative position
+
+Canvas - used to draw graphics. JavaScript needed to actually draw.
+    <canvas id="canvas1" width="200" height="100"></canvas>
+    - Drawn Programatically
+    - Drawing with Pixels
+    - Animations not built in
+    - High performance ??? pixel-based drawing operations
+    - Resolution Dependent
+    - No support for event handlers
+    - Can save image as .png .jpg
+    - Good for graphics intensive games
+
+svg
+    - Elements part of DOM (Document Object Model)
+    - Drawing with vectors
+    - Efects built in
+    - Based on XML standard syntax
+    - Resolution independent
+    - Support for event handlers
+    - Not for games
+    - Best for apps with large rendering areas (Google Maps)
+
+HTML5 Forms
+<form>
+    <label>Text</label>
+    <input type="text" name="email" placeholder="email@something.com" />
+</form>
+autofocus - makes focused when form loads
+<form autocomplete="off"> Nevyplni [redchadzajuci udaj</form>
+
+New HTML5 input types: color, date, datetime datetime-local, email, mon???, number, range, search, tel, time, url, week
+
+New attributes: autofocus, form, formation, formenctype, formmethod, formnovalidate, formtarget, height, width, list, min, max,
+    multiple, placeholder, pattern(reg exp), required, step
+
+Searchbox <input id="mysearch" name="searchitem" type="search" />
+
+Datalist <input id="car" type="text" list="colors" />
+    <datalist id="colors">
+        <option value="Red"></option>
+        <option value="Green"></option>
+    </datalist>
