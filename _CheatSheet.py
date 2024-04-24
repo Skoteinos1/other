@@ -42,7 +42,22 @@ dfNew.drop(dfNew.filter(regex='_y$').columns, axis=1, inplace=True)
 
 df = pandas.concat([d1, d2], ignore_index=False) # Joins 2 df's
 
+len(df.index)  # fastest wat to count rows
+
+
+# print(df.head(10))
+# new_df = df[(df['doRecommend'] != True) & (df['doRecommend'] != False )]
+# print(df.isnull().sum())
+# df[df.Cards == 4]
+# df.sort_values(by='Income',ascending=False).head()
+# new_df = df['doRecommend'] != True
+# between_30_and_35 = insurance_df[(insurance_df['age'] > 30) & (insurance_df['age'] < 35 )]
+# new_df = df[df.doRecommend != True].sample(10)
+
+
 df = df.dropna(axis=1, how='all') # Drops Nan columns
+df = df.dropna(inplace=True, axis=0)
+df = df.dropna(subset=['reviews.text'])
 
 df = df.loc[:,~df.apply(lambda x: x.duplicated(),axis=1).all()].copy()  # Removes Duplicated columns. 1st col priority
 
@@ -66,6 +81,8 @@ df_results = pandas.DataFrame(columns=['Predictor', 'R2 Train', 'R2 Test'])
 # numpy.linalg.inv() is used to calculate the inverse of a matrix, if it exists.
 
 
+# Inline if -------------------------------------------------------------------
+print("YES") if 5 == 3 else print("NO")
 
 # Date time -------------------------------------------------------------------
 import time
@@ -193,6 +210,9 @@ s = s[0::2]  # Every second character
 s = s[::-1]  # Reversed string
 s = s.lower()
 s = s.upper()
+if s.endswith('.'):
+    pass
+x = s.count('apple')  # counts number of occurances
 s = s.strip('=')  # Strips = from end and beginning
 s = s.replace('1', '2')
 # search_list = [lambda s: [p.strip() for p in s.split('\n')]]
