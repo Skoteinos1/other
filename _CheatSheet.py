@@ -1,6 +1,6 @@
 import os
 os.system('clear') # Cisti Terminal
-
+os.system('spd-say Done')
 
 # DataFrame --------------------------------------------------------------------
 # https://www.w3schools.com/python/pandas/pandas_ref_dataframe.asp
@@ -130,6 +130,7 @@ file_created = datetime.datetime.utcfromtimestamp(file_created).strftime('%Y-%m-
 os.rename('file.txt', 'file2.txt')
 size = os.path.getsize('file.txt')
 
+
 # For loop ---------------------------------------------------------------------
 lst = ['a', 'b', 'c']
 for i, row in enumerate(lst, start=0):
@@ -139,6 +140,10 @@ for i, row in enumerate(lst, start=0):
 # List -------------------------------------------------------------------------
 lst = [5, '2', 'nan']
 lst2 = [3, 5]
+# List can be add and multiplied same way as strings
+lst + lst2  # [5, '2', 'nan', 3, 5]
+lst2*2  # [3, 5, 3, 5]
+
 c = list(lst2)  # creates copy of a list
 tab = [[[0 for k in range(9)] for j in range(9)] for i in range(10)]
 lst = [float(x) for x in lst] # Converts List of numbers to float
@@ -170,6 +175,7 @@ print(divmod(5, 5))  # (1, 0)
 print(5 // 5)  #  1
 print(5 % 5)  #  0
 print(10**3)  # 1000
+print(9**1/2)  # 3
 
 
 # Pickle -----------------------------------------------------------------------
@@ -197,7 +203,10 @@ def load_pickle(fl_nm):
 
 
 # String -----------------------------------------------------------------------
+# String can be indexed like list. each character is like single element
 s = ''
+s = 'Brian\'s mother'  # Brian's mother
+print('spam'*3)  # spamspamspam
 s = s.replace("a", 'b')
 s = s.split('\n')
 s = s.split(";", 1) # Splits on first occurance
@@ -232,14 +241,34 @@ print("You worked {0} this month and earned ${1} per day".format(num_days = 22, 
 # insert values using empty placeholders
 print("You worked {} this month and earned ${} per day".format(num_days = 22, pay_per_day = 50))
 
+
 # Variables -------------------------------------------------------------------
 foo = float('nan')
 if not isinstance(foo, str):  # Checks if foo is string
     pass
 foo = input('press Enter...')  # Enter value to terminal
+del foo  # deletes variable
 
+# Precedence ----------
+False == False or True # True
+False == (False or True) # False
+# == before OR
+""" Highest to lowest precedence
+**      exponent
+~ + -   Complement, unary plus and minus (method names for last two +@ and -@)
+* / % //
++ -
+>> <<   Right and left bitwise shift
+&       Bitwise and
+^ |     Bitwise exclusive 'OR' and regular 'OR'
+<= < > >= Comparison operators
+<> == != equality operators
+= %= /= //= -= += Assignment operators
+is, is not identify operators
+in, not in membership operators
+not and or logical operators
+"""
 
-os.system('spd-say Done')
 
 # Theory -------------------------------------------------------------------
 # Immutable: str, int, float, bool, bytes, tuple - you can't change them after being defined.
@@ -288,7 +317,9 @@ def ddd(*args, **kwargs):
 ddd(y = 2, x = 1)
 
 
-# Runninc directly vs import -------------------------------------------------------------------
+# Running directly vs import -------------------------------------------------------------------
 
 if __name__ == "__main__":
     print('Running directly')  # This part will not run if you import from different module
+
+
