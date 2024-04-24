@@ -114,4 +114,52 @@ new elements: article, aside, audio, canvas, datalist, details, embed, footer, h
 Integrated API: Drag&Drop, Audio&Video, Offline Web Application, History, Local Storage, Geolocation, Web Messaging
 
 HTML5 introduces 7 main content models
-Metadata - 
+Metadata - sets up the presentation or behaviour of rest of content. Elements found in <head></head>
+    Elements: <base> <link> <meta> <noscript></noscript> <script></script> <style></style> <title></title>
+Embedded - Content that imports other resources into document
+    Elements: audio, video, canvas, iframe, img, object, math, svg
+Interactive - for user interaction
+    a, audio, video, button, label, object, select, textarea
+Heading - section header
+    h1 - h6, hgroup
+Phrasing - This model has inline level elements
+    img, span, strong, label, br/, small, sub
+Flow - Contains majority of HTML5 elements that would be included in normal flow of document
+Sectioning - Defines scop of heading, content, navigation, footers
+    Elements: article, aside, nav, section
+
+Page Structure
+<header>Contains branding like logo
+<nav> navigational section of site</nav>
+<article>main content
+    <section>divided section of main content</section>
+</article>
+<aside>
+    extra information and related content or links
+</aside>
+<footer>inf. about copyright, privacy policy, terms of use</footer>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+    </ul>
+</nav>
+
+Article - independent piece of content. Can be distributed separately. Newspaper article, blog entry
+    replaces <div class="article"> </div> from HTML4
+
+Section - can be used to divide content
+    <article>
+        <h1>Hello</h1>
+        <section>
+            <h2>Nadpis</h2>
+            <p>Text</p>
+        </section>
+    </article>
+
+Aside - usually represent sidebars
+
+Video - video controls
+
+Audio - 2 ways to declare
