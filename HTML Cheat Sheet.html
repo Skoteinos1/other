@@ -163,3 +163,44 @@ Aside - usually represent sidebars
 Video - video controls
 
 Audio - 2 ways to declare
+<audio src="audio.mp3" controls>
+    Not Supported
+</audio>
+<audio controls> <!-- controls - Display controls -->
+    <source src="audio.mp3" type="audio/mpeg"> <!-- Browser will use first recognized format -->
+    <source src="audio.ogg" type="audio/ogg">
+    Not Supported By Browser <!-- If nothing recognized than mmessage -->
+</audio>
+autoplay - autostart
+loop - hra dookola
+
+Progress - creates progress-bar, javascript to move it
+<progress min="0" max="100" value="35"></progress>
+
+Webstorage API - Websites store data on local PC
+    Before HTML5 we had to use JavaScript cookies
+    Faster, More secure, Larger Amount of Data, And it is not sent with every request.
+    SessionStorage() - Data Destroyed after Browser Close
+    localStorage() - No expiration Date
+
+Store - localStorage.setItem("key", "value");
+Get - "This will print value"
+    alert(localStorage.getItem("key"));
+Remove - localStorage.removeItem("key");
+Remove all - localStorage.clear();
+
+Geolocation API - user has to approve it
+    Parameters:
+        showLocation(mandatory) - Callback method that retrieves location information
+        ErrorHandler(optional) - Callback method, invoked when error occurs in processing asynchronous call
+        options(optional) - Defines set options
+    javascript needed
+    location - Geodetic 59.3 18.6 / 10 meters / 5km/h
+        Civic Manchester, 4th floor, walking
+        (position, elevation, heading, speed, orientation)
+
+Drag & Drop API - any element can be draggable
+    <img draggable="true" />
+
+SVG -  Scalable Vector Graphics
+
