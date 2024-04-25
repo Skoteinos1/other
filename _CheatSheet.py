@@ -111,6 +111,9 @@ for key in sorted(dic1):  # Sort Dictionary
     dic2[key] = dic1[key]
 
 dic1['new'] = dic1.pop('old')  # Rename key
+dic1.get('a')
+dic1.get('b', 'not in dic1')
+
 
 # Exceptions -------------------------------------------------------------------
 '''
@@ -194,6 +197,7 @@ for i, row in enumerate(lst, start=0):
 
 
 # List -------------------------------------------------------------------------
+# Tuples are faster than lists, but can't be changed
 lst = [5, '2', 'nan']
 lst2 = [3, 5]
 # List can be add and multiplied same way as strings
@@ -208,6 +212,9 @@ lst = [float(x) for x in lst] # Converts List of numbers to float
 lst = [float(x) for x in lst if float(x) == float(x)] # Converts List of numbers to float and drops nan's
 lst = [5] * 3  # [5, 5, 5]
 lst = [i for i in range(5)]  # [0, 1, 2, 3, 4]
+lst = [i**3 for i in range(5)]  # [0, 1, 8, 27, 64]
+lst = [i**2 for i in range(10) if i**2 % 2==0]  # [0,4,16,36,64] with enforced condition
+lst = [2*i for i in range(10**100)]  # too big range will cause memory error. It is solved by Generators
 lst = [[] for i in range(5)]  # [[], [], [], [], []]
 lst = [[j for j in range(3)] for i in range(5)]  # [[0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]]
 lst = [i for i in range(5) if i % 2 == 0]  # [0, 2, 4]
@@ -222,7 +229,6 @@ lst = list(set(lst) & set(lst2)) # List intersection
 lst.reverse() 
 total = sum(lst)
 
-
 groceries = ["apples", "milk", "cheese", "bread"]
 groceries.append("coffee") 	# ["apples", "milk", "cheese", "bread", "coffee"] append dava na koniec
 groceries.insert(0, "carrots") # ["carrots","apples", "milk", "cheese", "bread", "coffee"] insert dava na zaciatok alebo vybranu poziciu
@@ -231,6 +237,15 @@ groceries.pop() # ["carrots", "peas", "apples", "milk", "cheese", "bread"]
 groceries.pop(0) # ["peas","apples", "milk", "cheese", "bread"]
 groceries.remove("cheese") # ["peas","apples", "milk", "bread"]
 
+# Slicing is same as with strings, works on tuples
+nums = [0, 1, 2, 3, 4, 5]
+nums[0:1]  # [0]  - same as with range, first number is in, second is not
+nums[2:4]  # [2,3] 
+nums[:3]  # [0,1,2] - from start to 3
+nums[3:]  # [3,4,5] - 3 to end
+nums[0:4:2]  # [0,2] - third number is step
+nums[1:-1]  # [1,2,3,4]
+nums[::-1]  # Easy reverse list
 
 # Math -------------------------------------------------------------------------
 print(divmod(5, 5))  # (1, 0)
@@ -302,6 +317,8 @@ print(s, "is", num, "years old!")
 print("You worked {0} this month and earned ${1} per day".format(num_days = 22, pay_per_day = 50))
 # insert values using empty placeholders
 print("You worked {} this month and earned ${} per day".format(num_days = 22, pay_per_day = 50))
+# also works with named a rguments
+print("{x}").format(x=5)
 
 
 # Variables -------------------------------------------------------------------
@@ -348,6 +365,8 @@ print(x, y)  # [100, 2] [100, 2]
 y is x  # true because they reference to each other
 
 # Python evaluates NOT first, than AND than OR 
+
+None # represents absence of value, it is False when converted to boolean and is returned by def which doesn't return anything
 
 # defs -------------------------------------------------------------------
 def aaa(x, y):
