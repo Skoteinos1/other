@@ -112,15 +112,71 @@ for key in sorted(dic1):  # Sort Dictionary
 
 dic1['new'] = dic1.pop('old')  # Rename key
 
+# Exceptions -------------------------------------------------------------------
+'''
+Import Error - import fails
+Index Error - out of range index
+Name Error - unknown variable
+Syntax Error - code can't be parsed properly
+Type Error
+Value Error'''
+# Exception Handling
+try:
+    pass
+except ZeroDivisionError:
+    pass # if 3/0
+except (ValueError, TypeError):
+    pass  # only ony those 2 errors
+except:
+    pass  # on rest of errors
+finally:
+    pass  # this code always runs, no matter if there was or wasn't error
+
+# Raising exceptions
+pass
+# raise ValueError
+pass
+# raise NameError("Invalid Name!")
+
+try:
+    pass
+except:
+    print('Error')
+    raise  # re-raise whatever exception occured
+
+# Assertions - sanity check - expression is tested, when false, exception is raised
+x = "welcome"
+#if condition returns False, AssertionError is raised:
+assert x != "hello", "x should be 'hello'"  # AssertionError: x should be 'hello'
 
 # File -------------------------------------------------------------------------
 os.path.isfile('file.txt')  # Checks if file exists
+# modes: r - read, w - write, a - append, b - binary(for non-text files, image and audio), r+ - read and write, wb-
+
+# Method1
 f = open("file.txt", "w")
 f.write('Hello')
 f.close()
 
+# Method2: With ensures file is properly closed
+with open("movies.txt", "w") as f:
+    f.write('Hello')
+
+# Method3
+try:
+    file1 = open("file.txt", "r")
+finally:
+    file1.close()  # file is closed even if error occures
+
+
 file1 = open("file.txt", "r")
-read_content = file1.read()
+read_content = file1.read(1)  # reads first char
+read_content = file1.read(10)  # reads next 10 chars
+read_content = file1.read()  # reads until EOF
+read_content = file1.readlines()  # list with lines
+# with for loop:
+for line in file1:
+    print(line)
 f.close()
 
 file_created = os.path.getmtime('file.txt')
@@ -145,6 +201,8 @@ lst + lst2  # [5, '2', 'nan', 3, 5]
 lst2*2  # [3, 5, 3, 5]
 
 c = list(lst2)  # creates copy of a list
+range # creates a list of sequential numbers
+list(range(2,9,2)) # [2, 4, 6, 8]
 tab = [[[0 for k in range(9)] for j in range(9)] for i in range(10)]
 lst = [float(x) for x in lst] # Converts List of numbers to float
 lst = [float(x) for x in lst if float(x) == float(x)] # Converts List of numbers to float and drops nan's
@@ -155,15 +213,19 @@ lst = [[j for j in range(3)] for i in range(5)]  # [[0, 1, 2], [0, 1, 2], [0, 1,
 lst = [i for i in range(5) if i % 2 == 0]  # [0, 2, 4]
 all(i >= 30 for i in lst)  # Checks if all values in list are bigger than 30
 #  if any(x == 'some_val' for x in lst):
+max(lst)  # maximalna hodnota
+min(lst)  # minimalna hodnota
+lst.count('item')  # how many times is item in list
 lst.sort()  # Sort list
 lst = list(dict.fromkeys(lst))  # Removes duplicates from list
 lst = list(set(lst) & set(lst2)) # List intersection
 lst.reverse() 
 total = sum(lst)
 
+
 groceries = ["apples", "milk", "cheese", "bread"]
-groceries.append("coffee") 	# ["apples", "milk", "cheese", "bread", "coffee"]
-groceries.insert(0, "carrots") # ["carrots","apples", "milk", "cheese", "bread", "coffee"]
+groceries.append("coffee") 	# ["apples", "milk", "cheese", "bread", "coffee"] append dava na koniec
+groceries.insert(0, "carrots") # ["carrots","apples", "milk", "cheese", "bread", "coffee"] insert dava na zaciatok alebo vybranu poziciu
 groceries.insert(1, "peas") # ["carrots","peas","apples", "milk", "cheese", "bread", "coffee"]
 groceries.pop() # ["carrots", "peas", "apples", "milk", "cheese", "bread"]
 groceries.pop(0) # ["peas","apples", "milk", "cheese", "bread"]
