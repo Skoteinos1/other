@@ -102,6 +102,9 @@ st_cpu = time.process_time() # get the start time
 print('Real time:', time.time() - st_ex, 's    CPU time:', time.process_time() - st_cpu, 's') # get the execution time  # Put in the end
 
 
+# Decorators -------------------------------------------------------------------
+# Modify function with other function. When you don't want to modify first function.
+
 # Dictionary -------------------------------------------------------------------
 dic1 = {'a': 3}
 dic2 = {}
@@ -195,6 +198,27 @@ lst = ['a', 'b', 'c']
 for i, row in enumerate(lst, start=0):
     print(lst[i], row)
 
+# Generators -------------------------------------------------------------------
+# They don't allow indexing, but can be iterated through with for loop. Can be created with function and yeald statement.
+# They generate 1 item at a time, so they don't have the memory restrictions of lists, can be infinite
+def inf_fives():
+    while True:
+        yield 5
+for i in inf_fives():
+    print(i)
+# Finite generators can be converted into lists by passing them as arguments to the list function
+def nums(x):
+    for i in range(x):
+        if i % 2 == 0:
+            yield i
+print(list(nums(11)))  # [0,2,4,6,8,10]
+# Better performance, lower memory usage because of lazy(on demand) generation of values. We don't have to wait until all elements
+# have been generated before we can start use them.
+
+# Lambda -----------------------------------------------------------------------
+# Anonymous function
+lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
+# lambdas can be assigned to variables like normal functions
 
 # List -------------------------------------------------------------------------
 # Tuples are faster than lists, but can't be changed
@@ -247,6 +271,14 @@ nums[0:4:2]  # [0,2] - third number is step
 nums[1:-1]  # [1,2,3,4]
 nums[::-1]  # Easy reverse list
 
+
+# Map & Filter------------------------------------------------------------------
+# map - takes a function and iterable as arguments and returns a new iterable with function applied to each argument
+# filter - removes itterable which don't match a predicate
+nums = [11,22]
+res = list(filter(lambda x: x%2 == 0, nums))
+
+
 # Math -------------------------------------------------------------------------
 print(divmod(5, 5))  # (1, 0)
 print(5 // 5)  #  1
@@ -296,8 +328,8 @@ s = s[0::2]  # Every second character
 s = s[::-1]  # Reversed string
 s = s.lower()
 s = s.upper()
-if s.endswith('.'):
-    pass
+s.startswith("a")  # True if first char is a
+s.endswith('.')  # True if last char is .
 x = s.count('apple')  # counts number of occurances
 s = s.strip('=')  # Strips = from end and beginning
 s = s.replace('1', '2')
