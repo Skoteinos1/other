@@ -102,9 +102,6 @@ st_cpu = time.process_time() # get the start time
 print('Real time:', time.time() - st_ex, 's    CPU time:', time.process_time() - st_cpu, 's') # get the execution time  # Put in the end
 
 
-# Decorators -------------------------------------------------------------------
-# Modify function with other function. When you don't want to modify first function.
-
 # Dictionary -------------------------------------------------------------------
 dic1 = {'a': 3}
 dic2 = {}
@@ -198,28 +195,6 @@ lst = ['a', 'b', 'c']
 for i, row in enumerate(lst, start=0):
     print(lst[i], row)
 
-# Generators -------------------------------------------------------------------
-# They don't allow indexing, but can be iterated through with for loop. Can be created with function and yeald statement.
-# They generate 1 item at a time, so they don't have the memory restrictions of lists, can be infinite
-def inf_fives():
-    while True:
-        yield 5
-for i in inf_fives():
-    print(i)
-# Finite generators can be converted into lists by passing them as arguments to the list function
-def nums(x):
-    for i in range(x):
-        if i % 2 == 0:
-            yield i
-print(list(nums(11)))  # [0,2,4,6,8,10]
-# Better performance, lower memory usage because of lazy(on demand) generation of values. We don't have to wait until all elements
-# have been generated before we can start use them.
-
-# Lambda -----------------------------------------------------------------------
-# Anonymous function
-lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
-# lambdas can be assigned to variables like normal functions
-
 # List -------------------------------------------------------------------------
 # Tuples are faster than lists, but can't be changed
 lst = [5, '2', 'nan']
@@ -310,8 +285,68 @@ def load_pickle(fl_nm):
         data1 = ''
     return data1
 
+# Functional Programing ----------------------------------------------------------------------------------------------------------------
 
-# String -----------------------------------------------------------------------
+# Generators 
+# They don't allow indexing, but can be iterated through with for loop. Can be created with function and yeald statement.
+# They generate 1 item at a time, so they don't have the memory restrictions of lists, can be infinite
+def inf_fives():
+    while True:
+        yield 5
+for i in inf_fives():
+    print(i)
+# Finite generators can be converted into lists by passing them as arguments to the list function
+def nums(x):
+    for i in range(x):
+        if i % 2 == 0:
+            yield i
+print(list(nums(11)))  # [0,2,4,6,8,10]
+# Better performance, lower memory usage because of lazy(on demand) generation of values. We don't have to wait until all elements
+# have been generated before we can start use them.
+
+# Lambda 
+# Anonymous function
+lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
+# lambdas can be assigned to variables like normal functions
+
+# Decorators 
+# Modify function with other function. When you don't want to modify first function.
+def decor(func):
+    def wrap():
+        func()
+    return wrap
+
+@decor
+def wrap():
+    pass
+
+# Recursion - self reffence. Indirect recurion when 2 functions point at each other
+def factorial(x):
+    if x == 1:      # base case, without it it will run forever
+        return 1
+    else: 
+        return x * factorial(x-1)
+
+# Sets - similar to lists, unordered, can't be indexed, can't have duplicate values, faster to check if element is in set than in list
+foo = {1,2,3}
+bar = {3,4,5}
+foo.add(x)
+foo.remove(x)
+foo.pop()  # removes an arbitrary element
+foo | bar  # {1, 2, 3, 4, 5}
+foo & bar  # {3}
+foo - bar  # {1, 2}
+foo ^ bar  # {1, 2, 4, 5}
+
+# itertools - counts up infinetely from a value
+#     cycle - ifinetely iterates through iterable
+#     repeat - repats object infinetely or specified number of times
+#     takewhile - takes items from iterable while predicate functionsremains True
+#     chain - combines several iterables ine one long one
+#     accumulate - returns a running total of values in an iterable
+
+
+# String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
 s = ''
 s = 'Brian\'s mother'  # Brian's mother
