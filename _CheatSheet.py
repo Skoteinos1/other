@@ -143,6 +143,10 @@ pass
 
 try:
     pass
+except Exception as e: print(e)
+
+try:
+    pass
 except:
     print('Error')
     raise  # re-raise whatever exception occured
