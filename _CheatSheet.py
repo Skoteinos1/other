@@ -251,6 +251,16 @@ nums[1:-1]  # [1,2,3,4]
 nums[::-1]  # Easy reverse list
 
 
+# Magic Methods ----------------------------------------------------------------
+# have __ at begining and end, common use is operator overloading
+'''
+sub -
+mul *
+truediv /
+floordiv //
+'''
+
+
 # Map & Filter------------------------------------------------------------------
 # map - takes a function and iterable as arguments and returns a new iterable with function applied to each argument
 # filter - removes itterable which don't match a predicate
@@ -311,6 +321,8 @@ print(list(nums(11)))  # [0,2,4,6,8,10]
 # Lambda 
 # Anonymous function
 lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
+my_list = ['dddd','a','bb','ccc']
+my_list.sort(key=lambda s: len(s))  # sorts list by length of words
 # lambdas can be assigned to variables like normal functions
 
 # Decorators 
@@ -398,6 +410,31 @@ if not isinstance(foo, str):  # Checks if foo is string
     pass
 foo = input('press Enter...')  # Enter value to terminal
 del foo  # deletes variable
+
+# ------------ OOP -------------------------------------------------
+class Cat:
+    def __init__(self, color, legs):
+        self.color = color
+        self.legs = legs
+    def miau(self):
+        print('Miau')
+
+felix = Cat('ginger', 4)
+stumpy = Cat('brown',3)
+felix.miau()
+
+# Inheritance
+class Animal:   # Animal is superclass
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+class Cat(Animal):  # Cat is subclass
+    def purr(self):
+        print('purr')
+class Dog(Animal):
+    def bark(self):
+        print('bark')
+fido = Dog('Fido', 'brown')
 
 # Precedence ----------
 False == False or True # True
