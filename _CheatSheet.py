@@ -258,6 +258,23 @@ sub -
 mul *
 truediv /
 floordiv //
+mod % 
+pow **
+and &
+xor ^
+or |
+lt <
+le <=
+eq ==
+ne !=
+gt >
+ge >=
+len len()
+getitem  indexing
+setitem  assign value
+delitem  delete values
+iter    iteration
+contain     in
 '''
 
 
@@ -275,6 +292,82 @@ print(5 % 5)  #  0
 print(10**3)  # 1000
 print(9**1/2)  # 3
 
+# ------------ OOP -------------------------------------------------
+class Cat:
+    def __init__(self, color, legs):
+        self.color = color
+        self.legs = legs
+    def miau(self):
+        print('Miau')
+
+felix = Cat('ginger', 4)
+stumpy = Cat('brown',3)
+felix.miau()
+
+# Inheritance
+class Animal:   # Animal is superclass
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+class Cat(Animal):  # Cat is subclass
+    def purr(self):
+        print('purr')
+class Dog(Animal):
+    def bark(self):
+        print('bark')
+fido = Dog('Fido', 'brown')
+
+# Data Hiding
+# Key part of OOP is encapsulation, packaging variables and functions into single objects
+# _variable - weakly private
+# __variable - strongly private
+# In python only a convention. from module import * will not import them, but they can still be called
+class Spam:
+    __egg = 7
+s = Spam()
+foo = s._Spam__egg
+s.__egg # will not work
+
+# Class & Static Methods
+# Class methods are passed with cls parameter, marked with @classmethod
+@classmethod
+def something(cls, variable):
+    return cls(variable*5)
+# Nothing special about staticmethods, marked with @staticmethod
+
+#Properties - way of customizing access to instance attributes
+class Pizza:
+    def __init__(self, toppings):
+        self.toppings = toppings
+        self._pineapple_allowed = False
+    @property
+    def pineapple_allowed(self):
+        return True
+pizza = Pizza(['cheese', 'tomato'])
+print(pizza.pineapple_allowed)
+pizza.pineapple_allowed = False  # shouldn't work because property is read only
+
+
+
+# Precedence ----------
+False == False or True # True
+False == (False or True) # False
+# == before OR
+""" Highest to lowest precedence
+**      exponent
+~ + -   Complement, unary plus and minus (method names for last two +@ and -@)
+* / % //
++ -
+>> <<   Right and left bitwise shift
+&       Bitwise and
+^ |     Bitwise exclusive 'OR' and regular 'OR'
+<= < > >= Comparison operators
+<> == != equality operators
+= %= /= //= -= += Assignment operators
+is, is not identify operators
+in, not in membership operators
+not and or logical operators
+"""
 
 # Pickle -----------------------------------------------------------------------
 import pickle
@@ -410,52 +503,6 @@ if not isinstance(foo, str):  # Checks if foo is string
     pass
 foo = input('press Enter...')  # Enter value to terminal
 del foo  # deletes variable
-
-# ------------ OOP -------------------------------------------------
-class Cat:
-    def __init__(self, color, legs):
-        self.color = color
-        self.legs = legs
-    def miau(self):
-        print('Miau')
-
-felix = Cat('ginger', 4)
-stumpy = Cat('brown',3)
-felix.miau()
-
-# Inheritance
-class Animal:   # Animal is superclass
-    def __init__(self, name, color):
-        self.name = name
-        self.color = color
-class Cat(Animal):  # Cat is subclass
-    def purr(self):
-        print('purr')
-class Dog(Animal):
-    def bark(self):
-        print('bark')
-fido = Dog('Fido', 'brown')
-
-# Precedence ----------
-False == False or True # True
-False == (False or True) # False
-# == before OR
-""" Highest to lowest precedence
-**      exponent
-~ + -   Complement, unary plus and minus (method names for last two +@ and -@)
-* / % //
-+ -
->> <<   Right and left bitwise shift
-&       Bitwise and
-^ |     Bitwise exclusive 'OR' and regular 'OR'
-<= < > >= Comparison operators
-<> == != equality operators
-= %= /= //= -= += Assignment operators
-is, is not identify operators
-in, not in membership operators
-not and or logical operators
-"""
-
 
 # Theory -------------------------------------------------------------------
 # Immutable: str, int, float, bool, bytes, tuple - you can't change them after being defined.
