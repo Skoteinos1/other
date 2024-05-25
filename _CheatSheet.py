@@ -347,6 +347,19 @@ pizza = Pizza(['cheese', 'tomato'])
 print(pizza.pineapple_allowed)
 pizza.pineapple_allowed = False  # shouldn't work because property is read only
 
+class Pizza2:
+    def __init__(self, toppings):
+        self.toppings = toppings
+        self._pineapple_allowed = False
+    @property
+    def pineapple_allowed(self):
+        return self._pineapple_allowed
+
+    @pineapple_allowed.setter   # Use setter function to edit property
+    def pineapple_allowed(self, value):
+        self._pineapple_allowed = value
+pizza2 = Pizza2(['cheese', 'tomato'])
+pizza2.pineapple_allowed = 'Yes'
 
 
 # Precedence ----------
