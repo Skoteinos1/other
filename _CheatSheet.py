@@ -151,6 +151,13 @@ except:
     print('Error')
     raise  # re-raise whatever exception occured
 
+try:
+    pass
+except ZeroDivisionError:
+    pass # if 3/0
+else:
+    pass # runs if there was no error
+
 # Assertions - sanity check - expression is tested, when false, exception is raised
 x = "welcome"
 #if condition returns False, AssertionError is raised:
@@ -198,6 +205,74 @@ size = os.path.getsize('file.txt')
 lst = ['a', 'b', 'c']
 for i, row in enumerate(lst, start=0):
     print(lst[i], row)
+    if i == 50:
+        break
+else:
+    print('Unbroken')  # Runs if there is no break, same in while loop
+
+
+# Functional Programing ----------------------------------------------------------------------------------------------------------------
+
+# Generators 
+# They don't allow indexing, but can be iterated through with for loop. Can be created with function and yeald statement.
+# They generate 1 item at a time, so they don't have the memory restrictions of lists, can be infinite
+def inf_fives():
+    while True:
+        yield 5
+for i in inf_fives():
+    print(i)
+# Finite generators can be converted into lists by passing them as arguments to the list function
+def nums(x):
+    for i in range(x):
+        if i % 2 == 0:
+            yield i
+print(list(nums(11)))  # [0,2,4,6,8,10]
+# Better performance, lower memory usage because of lazy(on demand) generation of values. We don't have to wait until all elements
+# have been generated before we can start use them.
+
+# Lambda 
+# Anonymous function
+lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
+my_list = ['dddd','a','bb','ccc']
+my_list.sort(key=lambda s: len(s))  # sorts list by length of words
+# lambdas can be assigned to variables like normal functions
+
+# Decorators 
+# Modify function with other function. When you don't want to modify first function.
+def decor(func):
+    def wrap():
+        func()
+    return wrap
+
+@decor
+def wrap():
+    pass
+
+# Recursion - self reffence. Indirect recurion when 2 functions point at each other
+def factorial(x):
+    if x == 1:      # base case, without it it will run forever
+        return 1
+    else: 
+        return x * factorial(x-1)
+
+# Sets - similar to lists, unordered, can't be indexed, can't have duplicate values, faster to check if element is in set than in list
+foo = {1,2,3}
+bar = {3,4,5}
+foo.add(x)
+foo.remove(x)
+foo.pop()  # removes an arbitrary element
+foo | bar  # {1, 2, 3, 4, 5}
+foo & bar  # {3}
+foo - bar  # {1, 2}
+foo ^ bar  # {1, 2, 4, 5}
+
+# itertools - counts up infinetely from a value
+#     cycle - ifinetely iterates through iterable
+#     repeat - repats object infinetely or specified number of times
+#     takewhile - takes items from iterable while predicate functionsremains True
+#     chain - combines several iterables ine one long one
+#     accumulate - returns a running total of values in an iterable
+
 
 # List -------------------------------------------------------------------------
 # Tuples are faster than lists, but can't be changed
@@ -405,67 +480,7 @@ def load_pickle(fl_nm):
         data1 = ''
     return data1
 
-# Functional Programing ----------------------------------------------------------------------------------------------------------------
 
-# Generators 
-# They don't allow indexing, but can be iterated through with for loop. Can be created with function and yeald statement.
-# They generate 1 item at a time, so they don't have the memory restrictions of lists, can be infinite
-def inf_fives():
-    while True:
-        yield 5
-for i in inf_fives():
-    print(i)
-# Finite generators can be converted into lists by passing them as arguments to the list function
-def nums(x):
-    for i in range(x):
-        if i % 2 == 0:
-            yield i
-print(list(nums(11)))  # [0,2,4,6,8,10]
-# Better performance, lower memory usage because of lazy(on demand) generation of values. We don't have to wait until all elements
-# have been generated before we can start use them.
-
-# Lambda 
-# Anonymous function
-lambda x: x+5,7  # lambda arguments: vyraz, hodnota na dosadenie
-my_list = ['dddd','a','bb','ccc']
-my_list.sort(key=lambda s: len(s))  # sorts list by length of words
-# lambdas can be assigned to variables like normal functions
-
-# Decorators 
-# Modify function with other function. When you don't want to modify first function.
-def decor(func):
-    def wrap():
-        func()
-    return wrap
-
-@decor
-def wrap():
-    pass
-
-# Recursion - self reffence. Indirect recurion when 2 functions point at each other
-def factorial(x):
-    if x == 1:      # base case, without it it will run forever
-        return 1
-    else: 
-        return x * factorial(x-1)
-
-# Sets - similar to lists, unordered, can't be indexed, can't have duplicate values, faster to check if element is in set than in list
-foo = {1,2,3}
-bar = {3,4,5}
-foo.add(x)
-foo.remove(x)
-foo.pop()  # removes an arbitrary element
-foo | bar  # {1, 2, 3, 4, 5}
-foo & bar  # {3}
-foo - bar  # {1, 2}
-foo ^ bar  # {1, 2, 4, 5}
-
-# itertools - counts up infinetely from a value
-#     cycle - ifinetely iterates through iterable
-#     repeat - repats object infinetely or specified number of times
-#     takewhile - takes items from iterable while predicate functionsremains True
-#     chain - combines several iterables ine one long one
-#     accumulate - returns a running total of values in an iterable
 
 
 # String -------------------------------------------------------------------------------------------------------------------------------
@@ -516,6 +531,8 @@ if not isinstance(foo, str):  # Checks if foo is string
     pass
 foo = input('press Enter...')  # Enter value to terminal
 del foo  # deletes variable
+
+
 
 # Theory -------------------------------------------------------------------
 # Immutable: str, int, float, bool, bytes, tuple - you can't change them after being defined.
@@ -570,5 +587,4 @@ ddd(y = 2, x = 1)
 
 if __name__ == "__main__":
     print('Running directly')  # This part will not run if you import from different module
-
 
