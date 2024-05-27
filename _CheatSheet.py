@@ -533,6 +533,13 @@ foo = input('press Enter...')  # Enter value to terminal
 del foo  # deletes variable
 
 
+# Ternary Operator ------------------------------------------------------------
+a = 7
+b = 1 if a > 5 else 42
+if a > 5:
+    b = 1
+else:
+    b = 42
 
 # Theory -------------------------------------------------------------------
 # Immutable: str, int, float, bool, bytes, tuple - you can't change them after being defined.
