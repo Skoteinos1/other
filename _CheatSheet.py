@@ -595,3 +595,14 @@ ddd(y = 2, x = 1)
 if __name__ == "__main__":
     print('Running directly')  # This part will not run if you import from different module
 
+# Major 3rd party lib's ------------------------------------------------------------------------
+'''
+Django - Most frequent web framework, used by instagram, disqus
+CherryPy, Flask - popular web frameworks
+BeautifulSoup - Webscraping
+matplotlib - graphs
+NumPy - multidimensional arrays
+SciPy - upg on numpy
+Panda3D - 3D games
+pygame - 2D games
+'''     
