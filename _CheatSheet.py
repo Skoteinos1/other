@@ -605,4 +605,20 @@ NumPy - multidimensional arrays
 SciPy - upg on numpy
 Panda3D - 3D games
 pygame - 2D games
-'''     
+'''
+
+# Packages ---------------------------------------------------------------------------------------
+# If you want to create package for PyPl which could be installed by pip, this is folder structure
+'''
+MyPackage/
+    LICENSE.txt
+    README.txt
+    setup.py
+    mypackage/
+        __init__.py
+        mypackage.py
+        mypackage2.py
+'''
+# If you want to create executable file
+# For Win: py2exe, PyInstaller, cx_Freeze
+# for Mac: py2app, PyInstaller, cx_Freeze   
