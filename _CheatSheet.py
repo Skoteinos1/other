@@ -481,6 +481,21 @@ def load_pickle(fl_nm):
     return data1
 
 
+# Regular Expresions - RegEx --------------------------------------------------------------------
+# Verify string patterns and perform substitutions in string
+import re
+re.match # matches begining of string
+re.search # checks if there is a match and returns object with methods 
+re.findall  # returns list of matches
+re.group()  # what was matched
+re.start()  # starting position
+re.end()    # ending position
+re.span()  # tuple (re.start, re.end)
+pattern = r'xxx'
+replace_with = 'foo'
+what_string = 'axxxa'
+re.sub(pattern, replace_with, what_string, count=0) # count how many replacements max
+
 
 
 # String -------------------------------------------------------------------------------------------------------------------------------
@@ -595,6 +610,7 @@ ddd(y = 2, x = 1)
 if __name__ == "__main__":
     print('Running directly')  # This part will not run if you import from different module
 
+
 # Major 3rd party lib's ------------------------------------------------------------------------
 '''
 Django - Most frequent web framework, used by instagram, disqus
@@ -621,4 +637,4 @@ MyPackage/
 '''
 # If you want to create executable file
 # For Win: py2exe, PyInstaller, cx_Freeze
-# for Mac: py2app, PyInstaller, cx_Freeze   
+# for Mac: py2app, PyInstaller, cx_Freeze
