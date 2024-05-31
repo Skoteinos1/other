@@ -496,6 +496,14 @@ replace_with = 'foo'
 what_string = 'axxxa'
 re.sub(pattern, replace_with, what_string, count=0) # count how many replacements max
 
+pattern = r'spam'
+if re.match(pattern, 'spamspam'):
+    print('Match')
+
+re.match(r'spam', 'eggspam')  # False
+re.match(r'spam', 'spamegg')  # True
+re.search(r'spam', 'eggspam')  # True
+re.findall(r'spam', 'eggspamsausagespam') # ['spam', 'spam']  
 
 
 # String -------------------------------------------------------------------------------------------------------------------------------
