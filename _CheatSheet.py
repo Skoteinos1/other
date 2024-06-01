@@ -503,7 +503,13 @@ if re.match(pattern, 'spamspam'):
 re.match(r'spam', 'eggspam')  # False
 re.match(r'spam', 'spamegg')  # True
 re.search(r'spam', 'eggspam')  # True
-re.findall(r'spam', 'eggspamsausagespam') # ['spam', 'spam']  
+re.findall(r'spam', 'eggspamsausagespam') # ['spam', 'spam']
+
+match = re.search(r'spam', 'eggspamsausage')
+match.group()  # spam
+match.start()  # 4
+match.end()     # 7
+match.span()    # (4,7)
 
 
 # String -------------------------------------------------------------------------------------------------------------------------------
