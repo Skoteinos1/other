@@ -511,6 +511,14 @@ match.start()  # 4
 match.end()     # 7
 match.span()    # (4,7)
 
+s = "My name is David. Hi David."
+s2 = re.sub(r'David', 'Amy', s)
+
+# Metacharacters
+# . matches everything except \n
+# ^ matches start of string
+# $ matches end
+# if you want match metacharacters, you have to use \$ \.
 
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
