@@ -520,6 +520,12 @@ s2 = re.sub(r'David', 'Amy', s)
 # $ matches end
 # if you want match metacharacters, you have to use \$ \.
 
+re.match(r'gr.y', 'grey')  # True  # matches grXy
+re.match(r'gr.y', 'gray')  # True
+re.match(r'gr(a|e)y', 'gray')  # matches gray or grey
+re.match(r'^gr.y$', 'gray')  # True
+re.match(r'^gr.y$', 'graya')  # False  
+
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
 s = ''
