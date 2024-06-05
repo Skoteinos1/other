@@ -524,7 +524,15 @@ re.match(r'gr.y', 'grey')  # True  # matches grXy
 re.match(r'gr.y', 'gray')  # True
 re.match(r'gr(a|e)y', 'gray')  # matches gray or grey
 re.match(r'^gr.y$', 'gray')  # True
-re.match(r'^gr.y$', 'graya')  # False  
+re.match(r'^gr.y$', 'graya')  # False
+
+re.search(r'[aeiou]', 'grey') # True
+re.search(r'[aeiou]', 'myth') # False
+r'[a-z]' # matches lowercase
+r'[A-Z]' # matches uppercase
+r'[^A-Z]' # matches everything except uppercase
+r'[0-9]' # matches numbers
+r'[a-zA-Z]' # matches all letters
 
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
