@@ -165,6 +165,7 @@ assert x != "hello", "x should be 'hello'"  # AssertionError: x should be 'hello
 
 # File -------------------------------------------------------------------------
 os.path.isfile('file.txt')  # Checks if file exists
+os.path.isdir('new_folder')  # Checks if directory exists
 # modes: r - read, w - write, a - append, b - binary(for non-text files, image and audio), r+ - read and write, wb-
 
 # Method1
