@@ -549,6 +549,17 @@ r'[^A-Z]' # matches everything except uppercase
 r'[0-9]' # matches numbers
 r'[a-zA-Z]' # matches all letters
 
+re.search(r'[A-Z][A-Z][0-9]', 'AB5') # True
+re.search(r'[A-Z][A-Z][0-9]', 'A5') # False
+
+# * 0-n reps
+# + 1-n reps
+# ? 0-1 reps
+# {a, b}  a-b reps
+# {5} 5+ reps
+re.match(r'a(b)*', 'a')  # True
+re.match(r'a(b)*', 'abbbc')  # True
+
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
 s = ''
