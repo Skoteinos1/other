@@ -560,6 +560,13 @@ re.search(r'[A-Z][A-Z][0-9]', 'A5') # False
 re.match(r'a(b)*', 'a')  # True
 re.match(r'a(b)*', 'abbbc')  # True
 
+match = re.match(r'a(bc)(de)(f(g)h)i', 'abcdefghijklmno')
+match.group()  # abcdefghi
+match.group(0)  # abcdefghi
+match.group(1)  # bc
+match.group(2)  # de
+match.groups()  # ('bc', 'de', 'fgh', 'g')
+
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
 s = ''
