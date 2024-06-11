@@ -567,6 +567,11 @@ match.group(1)  # bc
 match.group(2)  # de
 match.groups()  # ('bc', 'de', 'fgh', 'g')
 
+match = re.match(r'(?P<first>abc)(?:def)(ghi)', 'abcdefghijklmno')
+match.group('first')  # abc
+match.groups()  # ('abc', 'ghi')  # ?: group is skipped, ?P<group_is_named>
+
+
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
 s = ''
