@@ -571,6 +571,15 @@ match = re.match(r'(?P<first>abc)(?:def)(ghi)', 'abcdefghijklmno')
 match.group('first')  # abc
 match.groups()  # ('abc', 'ghi')  # ?: group is skipped, ?P<group_is_named>
 
+re.match(r'(.+) \1', 'word word')  # True  # matches 2 same words with space between them # \1 is 1 repetition
+# \d matches digits
+# \w matches word characters
+# \s matches whitespace
+# \D \S \W - opposite of lowercase version
+# \A match beginning of a string
+# \Z match end of a string
+# \b matches empty string between \w a \W
+# \B matches empty string anywhere else
 
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
