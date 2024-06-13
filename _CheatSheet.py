@@ -493,7 +493,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-print(bcolors.WARNING +'Some Text'+ bcolors.ENDC)
+print(bcolors.WARNING +'Some Text'+ bcolors.ENDC)    
 
 
 # Regular Expresions - RegEx --------------------------------------------------------------------
@@ -580,6 +580,12 @@ re.match(r'(.+) \1', 'word word')  # True  # matches 2 same words with space bet
 # \Z match end of a string
 # \b matches empty string between \w a \W
 # \B matches empty string anywhere else
+
+# email extraction
+s = 'Contact me on some@mail.com'
+match = re.search(r'([\w\.-]+)@([\w\.-]+)(\.[\w\.]+)', s)
+match.group()  # some@mail.com
+
 
 # String -------------------------------------------------------------------------------------------------------------------------------
 # String can be indexed like list. each character is like single element
