@@ -315,6 +315,7 @@ groceries.insert(1, "peas") # ["carrots","peas","apples", "milk", "cheese", "bre
 groceries.pop() # ["carrots", "peas", "apples", "milk", "cheese", "bread"]
 groceries.pop(0) # ["peas","apples", "milk", "cheese", "bread"]
 groceries.remove("cheese") # ["peas","apples", "milk", "bread"]
+groceries = [ele for ele in groceries if ele not in ['cheese', 'peas']]  # ["apples", "milk", "bread"]
 
 # Slicing is same as with strings, works on tuples
 nums = [0, 1, 2, 3, 4, 5]
