@@ -630,6 +630,13 @@ print("You worked {} this month and earned ${} per day".format(num_days = 22, pa
 print("{x}").format(x=5)
 
 
+# Code speed, execution duration -------------------------------------------------------------------
+import time
+start_time = time.time()
+# TIMED CODE GOES HERE
+print("--- %s seconds ---" % (time.time() - start_time))
+
+
 # Variables -------------------------------------------------------------------
 foo = float('nan')
 if not isinstance(foo, str):  # Checks if foo is string
